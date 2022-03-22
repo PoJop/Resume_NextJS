@@ -16,9 +16,9 @@ main {
             flex: 0 1 100vw;
             flex-shrink: 0;
             height: 100vh;
-            padding: 25px 30px;
+            padding: 37px 25px;
             box-sizing: border-box;
-            padding-bottom: 80px;
+            padding-bottom: 180px;
             overflow-x: auto;
         }
     }
@@ -51,7 +51,7 @@ main {
                 position: absolute;
             }
             &.active {
-                height: 226px;
+                height: 210px;
             }
         }
         .svgLastPart {

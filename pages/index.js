@@ -3,6 +3,7 @@ import useResizeObserver from '@react-hook/resize-observer'
 import { DataContext } from '../contexts/data-context'
 import { Nav } from '../components/nav'
 import { PageInfo } from '../components/Pages/pageInfo'
+import { PageHome } from '../components/Pages/pageHome'
 const useSize = (target) => {
   const [size, setSize] = React.useState()
 
@@ -56,11 +57,13 @@ export default function Home() {
     <>
       <main>
         <div ref={target} className="pages">
-          <section page={0} className="page__wrapper">0</section>
+          <section page={0} className="page__wrapper">
+            <PageHome />
+          </section>
           <section page={1} className="page__wrapper">
             <PageInfo />
           </section >
-          <section page={2} className="page__wrapper">2</section>
+          {/* <section page={2} className="page__wrapper">2</section> */}
         </div>
         <Nav />
       </main>

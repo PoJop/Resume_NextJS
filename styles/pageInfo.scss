@@ -1,3 +1,4 @@
+@include btn-more;
 .full_name {
     font-family: "Calibri";
     font-style: normal;
@@ -6,6 +7,22 @@
     line-height: 17px;
     color: #8a3976;
     @include drop_down;
+}
+.description {
+    font-family: "Calibri";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8a3976;
+    p {
+        strong {
+            font-weight: 400;
+        }
+        span {
+            font-size: 10px;
+        }
+    }
 }
 .stack {
     font-family: "Calibri";
@@ -45,6 +62,18 @@
     }
 
     @include drop_down;
+    .drop_down {
+        .bottom {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                li {
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
 }
 .abuot_me {
     font-family: "Calibri";
@@ -53,6 +82,22 @@
     font-size: 14px;
     line-height: 17px;
     color: #8a3976;
+    h5 {
+        margin-bottom: 6px;
+    }
+    p {
+        line-height: 14px;
+
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        color: #8a3976;
+    }
+    img {
+        margin: 0 14px 5px 5px;
+    }
     &::before {
         content: '<div  class="about_me">';
         display: block;
@@ -62,6 +107,7 @@
         font-size: 10px;
         line-height: 12px;
         color: rgba(255, 255, 255, 0.2);
+        margin-bottom: 9px;
     }
     &::after {
         content: "</div>";
@@ -73,6 +119,7 @@
         font-size: 10px;
         line-height: 12px;
         color: rgba(255, 255, 255, 0.2);
+        margin-top: 9px;
     }
     p {
         & > img {
@@ -84,10 +131,53 @@
     }
 }
 .languages {
+    margin-top: 6px;
     font-family: "Calibri";
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
     line-height: 17px;
     color: #8a3976;
+}
+.experience {
+    h5 {
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 10px;
+        line-height: 12px;
+        text-align: center;
+        color: #ffffff;
+        margin: 6px 0;
+    }
+    ul {
+        li {
+            &:not(:first-child) {
+                padding: 10px 0 0 0;
+            }
+            &:not(:last-child) {
+                padding: 0 0 10px 0;
+                border-bottom: 1px solid #8a39765f;
+            }
+
+            h6 {
+                font-family: "Calibri";
+                font-style: normal;
+                font-weight: 300;
+                font-size: 14px;
+                line-height: 17px;
+
+                color: #8a3976;
+            }
+            small {
+                font-family: "Calibri";
+                font-style: normal;
+                font-weight: 300;
+                font-size: 14px;
+                line-height: 10px;
+                opacity: 0.6;
+                color: #8a3976;
+            }
+        }
+    }
 }

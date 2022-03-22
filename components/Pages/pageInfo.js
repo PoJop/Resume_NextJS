@@ -13,19 +13,24 @@ export const PageInfo = () => {
                 <div className="drop_down">
                     <div className="top">
                         <WrapperItem>
-                            {language.full_name.name}
+                            {language.pageInfo.full_name.name}
                         </WrapperItem>
                         <WrapperItem>
-                            <button onClick={() => setDropDownFullName(!dropDownFullName)}></button>
+                            <button
+                                onClick={() => setDropDownFullName(!dropDownFullName)}
+                                className="btn-more"
+                            >
+                                more
+                            </button>
                         </WrapperItem>
                     </div>
                     <div className={`bottom ${dropDownFullName ? "active" : ""}`}>
                         <WrapperItem>
                             <ul>
-                                <li>{language.full_name.dateOfBirth}</li>
-                                <li>{language.full_name.location}</li>
-                                <li>{language.full_name.mobile}</li>
-                                <li>{language.full_name.email}</li>
+                                <li>{language.pageInfo.full_name.dateOfBirth}</li>
+                                <li>{language.pageInfo.full_name.location}</li>
+                                <li>{language.pageInfo.full_name.mobile}</li>
+                                <li>{language.pageInfo.full_name.email}</li>
                             </ul>
                         </WrapperItem>
                     </div>
@@ -34,15 +39,16 @@ export const PageInfo = () => {
 
             <div className="description">
                 <WrapperItem>
+                    <p dangerouslySetInnerHTML={{ __html: language.pageInfo.description.content }} />
                 </WrapperItem>
             </div>
 
             <div className="stack">
                 <div className="title">
-                    <h5>{language.stack.current.title}</h5>
+                    <h5>{language.pageInfo.stack.current.title}</h5>
                 </div>
                 <ul className="current__stack">
-                    {language.stack.current.content.map((e, i) => (
+                    {language.pageInfo.stack.current.content.map((e, i) => (
                         <li key={i}>
                             <WrapperItem>
                                 {e}
@@ -54,15 +60,20 @@ export const PageInfo = () => {
                     <div className="top">
 
                         <WrapperItem>
-                            {language.stack.more.title}
+                            {language.pageInfo.stack.more.title}
                         </WrapperItem>
                         <WrapperItem>
-                            <button onClick={() => setDropDownStack(!dropDownStack)}></button>
+                            <button
+                                onClick={() => setDropDownStack(!dropDownStack)}
+                                className="btn-more"
+                            >
+                                more
+                            </button>
                         </WrapperItem>
                     </div>
                     <div className={`bottom ${dropDownStack ? "active" : ""}`}>
                         <ul>
-                            {language.stack.more.content.map((e, i) => (
+                            {language.pageInfo.stack.more.content.map((e, i) => (
                                 <li key={i}>
                                     <WrapperItem>
                                         {e}
@@ -75,24 +86,39 @@ export const PageInfo = () => {
             </div>
             <div className="abuot_me">
                 <WrapperItem>
-                    <h5>{language.abuot_me.title}</h5>
+                    <h5>{language.pageInfo.abuot_me.title}</h5>
                     <p>
                         <img src="./photo.jpg" />
-                        {language.abuot_me.content}
+                        {language.pageInfo.abuot_me.content}
                     </p>
                 </WrapperItem>
             </div>
             <div className="languages">
                 <WrapperItem>
-                    <h5>{language.languages.title}</h5>
+                    <h5>{language.pageInfo.languages.title}</h5>
                     <ul>
-                        {language.languages.content.map((e, i) => (
+                        {language.pageInfo.languages.content.map((e, i) => (
                             <li key={i}>{`${e.lang} - ${e.level}`}</li>
                         ))}
                     </ul>
                 </WrapperItem>
             </div>
-
+            <div className="experience">
+                <h5>{language.pageInfo.experience.title}</h5>
+                <WrapperItem>
+                    <ul>
+                        {language.pageInfo.experience.content.map((e, i) => (
+                            <li key={i}>
+                                <h6>{e.title}</h6>
+                                <small>{e.period}</small>
+                            </li>
+                        ))}
+                    </ul>
+                </WrapperItem>
+            </div>
+            <div className="p-s_message">
+                <strong>{language.pageInfo.message}</strong>
+            </div>
         </>
     )
 }

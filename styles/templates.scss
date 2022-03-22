@@ -24,3 +24,17 @@
         }
     }
 }
+@mixin btn-more {
+    .btn-more {
+        padding: 0;
+        border: none;
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+        background-color: transparent;
+        color: #8a3976;
+    }
+}
