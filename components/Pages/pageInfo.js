@@ -42,8 +42,8 @@ export const PageInfo = () => {
                     <h5>{language.stack.current.title}</h5>
                 </div>
                 <ul className="current__stack">
-                    {language.stack.current.content.map((e) => (
-                        <li>
+                    {language.stack.current.content.map((e, i) => (
+                        <li key={i}>
                             <WrapperItem>
                                 {e}
                             </WrapperItem>
@@ -62,8 +62,8 @@ export const PageInfo = () => {
                     </div>
                     <div className={`bottom ${dropDownStack ? "active" : ""}`}>
                         <ul>
-                            {language.stack.more.content.map((e) => (
-                                <li>
+                            {language.stack.more.content.map((e, i) => (
+                                <li key={i}>
                                     <WrapperItem>
                                         {e}
                                     </WrapperItem>
@@ -86,8 +86,8 @@ export const PageInfo = () => {
                 <WrapperItem>
                     <h5>{language.languages.title}</h5>
                     <ul>
-                        {language.languages.content.map((e) => (
-                            <li>{`${e.lang} - ${e.level}`}</li>
+                        {language.languages.content.map((e, i) => (
+                            <li key={i}>{`${e.lang} - ${e.level}`}</li>
                         ))}
                     </ul>
                 </WrapperItem>
