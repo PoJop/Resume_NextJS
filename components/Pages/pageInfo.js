@@ -29,8 +29,8 @@ export const PageInfo = () => {
                             <ul>
                                 <li>{language.pageInfo.full_name.dateOfBirth}</li>
                                 <li>{language.pageInfo.full_name.location}</li>
-                                <li>{language.pageInfo.full_name.mobile}</li>
-                                <li>{language.pageInfo.full_name.email}</li>
+                                <li><a href={`tel: ${language.pageInfo.full_name.mobile}`} >{language.pageInfo.full_name.mobile}</a></li>
+                                <li><a href="https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRvwdPPhsGbkhGwSgSmfJMXMPtGFTvTrTjtlCwhjWkJjpxmmmbGwnGCftGxxPpPBXXMBQPq">{language.pageInfo.full_name.email}</a></li>
                             </ul>
                         </WrapperItem>
                     </div>

@@ -6,6 +6,10 @@
     font-size: 14px;
     line-height: 17px;
     color: #8a3976;
+    a {
+        color: #8a3976;
+        text-decoration: none;
+    }
     @include drop_down;
 }
 .description {

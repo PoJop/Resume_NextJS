@@ -40,6 +40,31 @@ main {
         svg {
             width: 100vw;
         }
+        .content {
+            .networks {
+                margin-top: 20px;
+                h5 {
+                    font-family: "Calibri";
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 14px;
+                    line-height: 17px;
+                    text-align: center;
+                    color: #8a3976;
+                }
+                ul {
+                    display: flex;
+                    justify-content: space-around;
+                    margin-top: 15px;
+                    li {
+                        width: 30px;
+                        svg {
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+        }
         .nav_wrapper {
             width: 100vw;
             height: 74px;
