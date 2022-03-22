@@ -1,0 +1,26 @@
+@mixin drop_down {
+    .drop_down {
+        .top {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 6px;
+            & > div:first-child {
+                flex-grow: 1;
+            }
+        }
+        .bottom {
+            pointer-events: none;
+            opacity: 0;
+            height: 0;
+            transform: translateY(-20px);
+            transition: all 0.1s;
+            &.active {
+                pointer-events: auto;
+                opacity: 1;
+                height: auto;
+                transform: translateY(0px);
+                margin-bottom: 6px;
+            }
+        }
+    }
+}

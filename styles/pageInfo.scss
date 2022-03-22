@@ -1,0 +1,93 @@
+.full_name {
+    font-family: "Calibri";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8a3976;
+    @include drop_down;
+}
+.stack {
+    font-family: "Calibri";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #8a3976;
+    .title {
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 15px;
+        text-align: center;
+        color: #ffffff;
+        margin: 8px 0;
+    }
+    .current__stack {
+        display: flex;
+        gap: 4px;
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        color: #8a3976;
+        margin-bottom: 6px;
+        li {
+            flex-grow: 1;
+            text-align: center;
+        }
+    }
+
+    @include drop_down;
+}
+.abuot_me {
+    font-family: "Calibri";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8a3976;
+    &::before {
+        content: '<div  class="about_me">';
+        display: block;
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 10px;
+        line-height: 12px;
+        color: rgba(255, 255, 255, 0.2);
+    }
+    &::after {
+        content: "</div>";
+        display: block;
+        text-align: end;
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 10px;
+        line-height: 12px;
+        color: rgba(255, 255, 255, 0.2);
+    }
+    p {
+        & > img {
+            float: right;
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+        }
+    }
+}
+.languages {
+    font-family: "Calibri";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8a3976;
+}
