@@ -11,7 +11,10 @@ main {
         display: flex;
         // gap: 12px;
         width: 100vw;
+        position: relative;
         box-sizing: border-box;
+        // pointer-events: none;
+        z-index: 4;
         .page__wrapper {
             flex: 0 1 100vw;
             flex-shrink: 0;
@@ -36,7 +39,7 @@ main {
         width: 100vw;
         position: fixed;
         bottom: 0;
-        z-index: 3;
+        z-index: 10;
         svg {
             width: 100vw;
         }
@@ -76,7 +79,7 @@ main {
                 position: absolute;
             }
             &.active {
-                height: 210px;
+                height: 200px;
             }
         }
         .svgLastPart {
@@ -105,5 +108,15 @@ main {
             align-items: center;
             justify-content: space-around;
         }
+    }
+}
+#article {
+    position: relative;
+    z-index:2;
+    canvas {
+        background: transparent;
+        position: absolute;
+        top: 0;
+        box-sizing: border-box;
     }
 }
