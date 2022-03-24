@@ -5,6 +5,7 @@ import { Nav } from '../components/nav'
 import { PageInfo } from '../components/Pages/pageInfo'
 import { PageHome } from '../components/Pages/pageHome'
 import { Background } from '../components/Background'
+import { useDoubleTap } from 'use-double-tap';
 const useSize = (target) => {
   const [size, setSize] = React.useState()
 
@@ -27,9 +28,16 @@ export default function Home() {
   const target = React.useRef(null)
   const size = useSize(target)
   const navRef = React.useRef(null)
+  const [gravity, setGravity] = React.useState(false)
+  const mainRef = React.useRef(null)
+  const bind = useDoubleTap((event) => {
+    setGravity(!gravity);
+  });
 
- 
 
+  React.useEffect(() => {
+    console.log(gravity)
+  }, [gravity])
   // target.current.addEventListener("touchstart", handleStart, false);
   // React.useEffect(() => {
   //   if (target && target.current) {
@@ -64,9 +72,9 @@ export default function Home() {
 
   return (
     <>
-      <main>
-        <Background size={size} navRef={navRef}/>
-        <div ref={target} className="pages">
+      <main ref={mainRef} {...bind}>
+        <Background size={size} navRef={navRef} />
+        <div ref={target} className="pages" style={{ pointerEvents: `${gravity ? "fill" : "none"}` }}>
           <section page={0} className="page__wrapper">
             <PageHome />
           </section>
@@ -75,7 +83,7 @@ export default function Home() {
           </section >
           <section page={2} className="page__wrapper">2</section>
         </div>
-        <Nav navRef={navRef}/>
+        <Nav navRef={navRef} />
       </main>
     </>
   )

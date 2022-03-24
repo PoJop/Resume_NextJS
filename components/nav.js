@@ -2,6 +2,7 @@ import React from 'react';
 
 export const Nav = ({navRef}) => {
     const [navBar, setNavBar] = React.useState(false)
+    
     return (
         <>
             <nav className="nav" ref={navRef}>
@@ -61,6 +62,7 @@ export const Nav = ({navRef}) => {
 
                         <div className="button_item">
                             <button className={`nav__button ${navBar ? "active" : ""}`} onClick={() => setNavBar(!navBar)}></button>
+                       
                         </div>
                         <p>&nbsp;</p>
                         <div className="networks">
