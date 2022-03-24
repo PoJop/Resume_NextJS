@@ -1,11 +1,10 @@
 import React from 'react';
 
-export const Nav = () => {
+export const Nav = ({navRef}) => {
     const [navBar, setNavBar] = React.useState(false)
-
     return (
         <>
-            <nav className="nav">
+            <nav className="nav" ref={navRef}>
                 <div className={`nav_wrapper ${navBar ? "active" : ""}`}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

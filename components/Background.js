@@ -1,6 +1,5 @@
 import React from 'react';
 import Matter from 'matter-js'
-
 // if (size === undefined) return
 // if (!runWorld) {
 //     // create renderer
@@ -93,12 +92,12 @@ import Matter from 'matter-js'
 //     };
 // }
 
-export const Background = ({ size }) => {
+export const Background = ({ size, navRef }) => {
 
     const [runWorld, setRunWorld] = React.useState(false)
-
-
-
+    React.useEffect(() => {
+        console.log(navRef)
+    }, [navRef])
     React.useEffect(() => {
         if (size === undefined) return
         if (runWorld) return
@@ -113,7 +112,30 @@ export const Background = ({ size }) => {
 
         let engine = Engine.create();
 
-        engine.gravity.y = 0;
+        window.addEventListener('deviceorientation', handleOrientation);
+
+        function handleOrientation(event) {
+            const alpha = event.alpha;
+            const beta = event.beta;
+            const gamma = event.gamma;
+            // console.log(alpha, beta, gamma)
+
+            engine.gravity.x = GravityOrientation(gamma);
+            engine.gravity.y = GravityOrientation(beta);
+        }
+        const GravityOrientation = (e) => {
+            let g = 0
+            if (e >= -10) { //|| e >= -170 || e <= 170 || e <= 10
+                g = e / 1000
+                console.log(e, "1")
+            } else {
+                g = e / 100
+                console.log(e, "2")
+            }
+            console.log(g)
+            return g
+        }
+
         // setTimeout(() => {
         //     engine.gravity.y = 0;
         // }, 5000)
@@ -135,11 +157,18 @@ export const Background = ({ size }) => {
                 fillStyle: 'transparent',
             }
         }
+
+
         let topWall = Bodies.rectangle(size.width / 2, -20, size.width + (size.width / 3) * 2, 20, options);
         let leftWall = Bodies.rectangle(-45, size.height / 2, 20, size.height, options);
         let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 20, size.height, options);
         let bottomWall = Bodies.rectangle(size.width / 2, size.height - 60, size.width, 20, options);
-
+        // setTimeout(() => {
+        //     Body.setVelocity(topWall, { x: 0, y: getRandomArbitrary(0, 6) });
+        //     Body.setVelocity(bottomWall, { x: 0, y: getRandomArbitrary(-6, 0) });
+        //     Body.setVelocity(rightWall, { x: getRandomArbitrary(-6, 0), y: 0 });
+        //     Body.setVelocity(leftWall, { x: getRandomArbitrary(0, 6), y: 0 });
+        // }, 1000)
         let boxs = [];
         let whiteBoxs = [];
         World.add(engine.world, [topWall, leftWall, rightWall, bottomWall]);
@@ -148,7 +177,7 @@ export const Background = ({ size }) => {
         }
         let num = 15
         for (let i = 0; i < num; i++) {
-            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 35, 35, {
+            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 37, 37, {
                 frictionAir: 0,
                 render: {
                     strokeStyle: '#ffffff',
@@ -209,6 +238,9 @@ export const Background = ({ size }) => {
 
     }, [runWorld, size])
 
+    React.useEffect(() => {
+
+    }, [])
 
     return (
         <>

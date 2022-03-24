@@ -16,11 +16,17 @@ const useSize = (target) => {
   useResizeObserver(target, (entry) => setSize(entry.contentRect))
   return size
 }
+
+
+
+
+
 export default function Home() {
   const [currentPage, setCurrentPage] = React.useState(1)
   const { language, toggleLanguage } = React.useContext(DataContext)
   const target = React.useRef(null)
   const size = useSize(target)
+  const navRef = React.useRef(null)
 
  
 
@@ -59,7 +65,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <Background size={size}/>
+        <Background size={size} navRef={navRef}/>
         <div ref={target} className="pages">
           <section page={0} className="page__wrapper">
             <PageHome />
@@ -69,7 +75,7 @@ export default function Home() {
           </section >
           <section page={2} className="page__wrapper">2</section>
         </div>
-        <Nav />
+        <Nav navRef={navRef}/>
       </main>
     </>
   )
