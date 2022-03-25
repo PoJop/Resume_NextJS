@@ -71,7 +71,7 @@ export default function Home() {
     <>
       <main ref={mainRef} {...bind}>
         <Background size={size} navRef={navRef} />
-        <div ref={target} className="pages" style={{ pointerEvents: `${gravity ? "fill" : "none"}` }}>
+        <div ref={target} className="pages" style={{ pointerEvents: `${!gravity ? "fill" : "none"}` }}>
           <section page={0} className="page__wrapper">
             <PageHome />
           </section>

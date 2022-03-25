@@ -69,7 +69,7 @@ export const Background = ({ size, navRef }) => {
         let leftWall = Bodies.rectangle(-45, size.height / 2, 50, size.height, options);
         let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 50, size.height, options);
         let bottomWall = Bodies.rectangle(size.width / 2, size.height - 26, size.width + 200, 50, options);
-        let bottomWallApp = Bodies.rectangle(size.width / 2, size.height - 45, size.width /2, 50, options);
+        let bottomWallApp = Bodies.rectangle(size.width / 2, size.height - 45, size.width / 2, 50, options);
 
         // setTimeout(() => {
         //     Body.setVelocity(topWall, { x: 0, y: getRandomArbitrary(0, 6) });
@@ -88,12 +88,27 @@ export const Background = ({ size, navRef }) => {
 
         var group1 = Body.nextGroup(true)
         var group2 = Body.nextGroup(true)
+        var group3 = Body.nextGroup(true)
+        var group4 = Body.nextGroup(true)
+
+        const group = (i) => {
+            let g = getRandomArbitrary(0, 4)
+            if (i % 2 === 0) {
+                return group2
+            } 
+            else if (i % 3 === 0) {
+                return group3
+            } 
+            else {
+                return group1
+            }
+        }
 
         for (let i = 0; i < num; i++) {
-            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 38, 38, {
+            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, {
                 frictionAir: 0.001,
                 friction: 0.05,
-                collisionFilter: { group: i % 2 === 0 ? group1 : group2 },
+                collisionFilter: { group: group(i) },
                 render: {
                     strokeStyle: '#ffffff',
                     fillStyle: "transparent",
@@ -103,22 +118,22 @@ export const Background = ({ size, navRef }) => {
                     }
                 }
             }))
-            if (num /2  < i) {
-            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 38, 38, {
-                frictionAir: 0.001,
-                friction: 0.05,
-                collisionFilter: { group: i % 2 === 0 ? group1 : group2 },
-                render: {
-                    strokeStyle: '#ffffff',
-                    fillStyle: "transparent",
-                    shadowBlur: 20,
-                    opacity: 0.7,
-                    backdropFilte: 'blur(4px)',
-                    sprite: {
-                        texture: `./temp/White.png`
+            if (num / 2 >= i) {
+                boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, { //getRandomArbitrary(0, size.height)
+                    frictionAir: 0.001,
+                    friction: 0.05,
+                    collisionFilter: { group: group(i) },
+                    render: {
+                        strokeStyle: '#ffffff',
+                        fillStyle: "transparent",
+                        shadowBlur: 20,
+                        opacity: 0.7,
+                        backdropFilte: 'blur(4px)',
+                        sprite: {
+                            texture: `./temp/White.png`
+                        }
                     }
-                }
-            }))
+                }))
             }
         }
 
@@ -131,7 +146,7 @@ export const Background = ({ size, navRef }) => {
 
         boxs.forEach(e => {
             World.add(engine.world, e)
-            Body.setVelocity(e, { x: getRandomArbitrary(-2, 2), y: getRandomArbitrary(-2, 2) })
+            // Body.setVelocity(e, { x: getRandomArbitrary(-2, 2), y: getRandomArbitrary(-2, 2) })
         })
 
         Render.run(render);
