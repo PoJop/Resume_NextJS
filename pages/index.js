@@ -35,9 +35,6 @@ export default function Home() {
   });
 
 
-  React.useEffect(() => {
-    console.log(gravity)
-  }, [gravity])
   // target.current.addEventListener("touchstart", handleStart, false);
   // React.useEffect(() => {
   //   if (target && target.current) {

@@ -38,12 +38,11 @@ export const Background = ({ size, navRef }) => {
                 g = e / 100
             } else g = e / 50
 
+            if (g >= 0 && g > 1) return 1
+            if (g <= 0 && g < -1) return -1
+
             return g
         }
-
-        // setTimeout(() => {
-        //     engine.gravity.y = 0;
-        // }, 5000)
         let render = Render.create({
             element: document.querySelector("#article"),
             engine: engine,
@@ -55,6 +54,9 @@ export const Background = ({ size, navRef }) => {
                 wireframes: false
             }
         });
+
+
+
         const options = {
             isStatic: true,
             render: {
@@ -63,11 +65,11 @@ export const Background = ({ size, navRef }) => {
             }
         }
 
-
-        let topWall = Bodies.rectangle(size.width / 2, -20, size.width + (size.width / 3) * 2, 20, options);
-        let leftWall = Bodies.rectangle(-45, size.height / 2, 20, size.height, options);
-        let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 20, size.height, options);
-        let bottomWall = Bodies.rectangle(size.width / 2, size.height - 60, size.width, 20, options);
+        let topWall = Bodies.rectangle(size.width / 2, -30, size.width + 200, 50, options);
+        let leftWall = Bodies.rectangle(-45, size.height / 2, 50, size.height, options);
+        let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 50, size.height, options);
+        let bottomWall = Bodies.rectangle(size.width / 2, size.height - 26, size.width + 200, 50, options);
+        let bottomWallApp = Bodies.rectangle(size.width / 2, size.height - 45, size.width /2, 50, options);
 
         // setTimeout(() => {
         //     Body.setVelocity(topWall, { x: 0, y: getRandomArbitrary(0, 6) });
@@ -76,49 +78,60 @@ export const Background = ({ size, navRef }) => {
         //     Body.setVelocity(leftWall, { x: getRandomArbitrary(0, 6), y: 0 });
         // }, 1000)
 
-        let boxs = [],
-            whiteBoxs = [];
+        let boxs = []
 
-        World.add(engine.world, [topWall, leftWall, rightWall, bottomWall]);
+        World.add(engine.world, [topWall, leftWall, rightWall, bottomWall, bottomWallApp]);
         const getRandomArbitrary = (min, max) => {
             return Math.random() * (max - min) + min;
         }
+        let num = 19
 
-        let num = 15
+        var group1 = Body.nextGroup(true)
+        var group2 = Body.nextGroup(true)
 
         for (let i = 0; i < num; i++) {
-            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 37, 37, {
-                frictionAir: 0,
+            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 38, 38, {
+                frictionAir: 0.001,
                 friction: 0.05,
+                collisionFilter: { group: i % 2 === 0 ? group1 : group2 },
                 render: {
                     strokeStyle: '#ffffff',
+                    fillStyle: "transparent",
                     sprite: {
                         texture: `./temp/${i + 1}.png`,
                         filter: "drop-shadow(0px 14px 4px rgba(0, 0, 0, 1))"
                     }
                 }
             }))
-            if (num / 2 < i) {
-                whiteBoxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 35, 35, {
-                    frictionAir: 0,
-                    friction: 0.05,
-                    render: {
-                        strokeStyle: '#ffffff',
-                        sprite: {
-                            texture: `./temp/White.png`
-                        }
+            if (num /2  < i) {
+            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), getRandomArbitrary(0, size.height), 38, 38, {
+                frictionAir: 0.001,
+                friction: 0.05,
+                collisionFilter: { group: i % 2 === 0 ? group1 : group2 },
+                render: {
+                    strokeStyle: '#ffffff',
+                    fillStyle: "transparent",
+                    shadowBlur: 20,
+                    opacity: 0.7,
+                    backdropFilte: 'blur(4px)',
+                    sprite: {
+                        texture: `./temp/White.png`
                     }
-                }))
+                }
+            }))
             }
         }
 
+        var ctx = document.querySelector('canvas').getContext('2d', { antialias: false });
+        ctx.shadowOffsetX = 4;
+        ctx.shadowOffsetY = 4;
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
+
+
         boxs.forEach(e => {
             World.add(engine.world, e)
-            Body.setVelocity(e, { x: getRandomArbitrary(-2, 2), y: getRandomArbitrary(-2, 2) });
-        })
-        whiteBoxs.forEach(e => {
-            World.add(engine.world, e)
-            Body.setVelocity(e, { x: getRandomArbitrary(-2, 2), y: getRandomArbitrary(-2, 2) });
+            Body.setVelocity(e, { x: getRandomArbitrary(-2, 2), y: getRandomArbitrary(-2, 2) })
         })
 
         Render.run(render);
@@ -142,9 +155,6 @@ export const Background = ({ size, navRef }) => {
 
     }, [runWorld, size])
 
-    React.useEffect(() => {
-
-    }, [])
 
     return (
         <>
