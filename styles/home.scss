@@ -4,7 +4,7 @@ body {
 }
 main {
     overflow: hidden;
-    background: linear-gradient(162.44deg, #ea916b 0%, rgba(195, 64, 217, 0.32) 100%);
+    background: linear-gradient(162.44deg, #ea916b 10%, rgba(195, 64, 217, 0.6) 100%);
 
     .pages {
         overflow-x: auto;
@@ -106,16 +106,131 @@ main {
             display: flex;
             align-items: center;
             justify-content: space-around;
+            padding: 0 42px;
+            & > div {
+                &:first-child {
+                    button {
+                        border: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: transparent;
+                        transition: all 1s ease 0s;
+                        svg {
+                            width: 20px;
+                            height: 20px;
+                        }
+                        &.active {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+                &:last-child {
+                    flex-grow: 1;
+                    display: flex;
+                    justify-content: center;
+                    button {
+                        margin-right: 20px;
+                    }
+                }
+            }
         }
     }
 }
 #article {
     position: relative;
-    z-index:2;
+    z-index: 2;
     canvas {
         background: transparent;
         position: absolute;
         top: 0;
         box-sizing: border-box;
+        z-index: 3;
     }
+}
+
+.setting_popup {
+    position: fixed;
+    bottom: 74px;
+    z-index: 9;
+    display: flex;
+    width: 100vw;
+    padding: 0 42px;
+    transform: translateY(150%);
+    transition: all 1s ease 0s;
+    pointer-events: none;
+    &.open {
+        transform: translateY(0);
+    }
+    .wrapper {
+        display: flex;
+        gap: 8px;
+        pointer-events: fill;
+        .bar {
+            filter: drop-shadow(0px -1px 4px rgba(0, 0, 0, 0.25));
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.23);
+            border: 1px solid #ffffff;
+            box-sizing: border-box;
+            border-radius: 10px;
+            .container {
+                & > ul {
+                    padding: 12px 22px 12px 12px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 11px;
+                    & > li {
+                        & > strong {
+                            font-family: "Calibri";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 14px;
+                            line-height: 17px;
+                            color: #ffffff;
+                        }
+                        .button_setting {
+                            border: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            border: 1px solid #ebebeb;
+                            box-sizing: border-box;
+                            border-radius: 3px;
+                            width: 56px;
+                            justify-content: flex-end;
+
+                            & > span {
+                                background: #f88a8a;
+                                border-radius: 3px;
+                                width: 28px;
+                                font-family: "Calibri";
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 11px;
+                                line-height: 13px;
+                                padding: 2px;
+                                color: #ffffff;
+                            }
+                            &.active {
+                                justify-content: flex-start;
+                                & > span {
+                                    background: #7ab383;
+                                }
+                            }
+                        }
+                    }
+                }
+                .button_reset {
+                    padding: 0 0 8px 12px;
+                }
+            }
+        }
+    }
+}
+
+.console {
+    position: fixed;
+    top: 0;
+    z-index: 30;
 }

@@ -3,7 +3,8 @@ import React from 'react';
 export const language = {
     en: {
         pageHome: {
-            title: "Hi, my name is Oleg <br/> <strong>and this is my resume</strong>"
+            title: "<strong>resume</strong>"
+            // title: "Hi, my name is Oleg <br/> <strong>and this is my resume</strong>"
         },
         pageInfo: {
             full_name: {
