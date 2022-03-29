@@ -28,11 +28,11 @@ function MyApp({ Component, pageProps }) {
       document.body.style.height = window.outerHeight + 'px';
       setTimeout(function () {
         window.scrollTo(0, 1);
-      }, 1100);
-    }, 1000);
+      }, 200);
+    }, 100);
     return false;
   }
-  
+
   return (
     <>
       <Head>
