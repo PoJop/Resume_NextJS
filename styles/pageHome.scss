@@ -1,3 +1,8 @@
+.home_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .logo {
     // z-index: 1000;
     position: relative;
@@ -23,7 +28,7 @@
         strong {
             position: relative;
             font-weight: 700;
-                font-size: 62px;
+            font-size: 62px;
             z-index: 1;
         }
         &::before {
@@ -66,4 +71,22 @@
     display: flex;
     margin-top: 20px;
     justify-content: flex-end;
+}
+.help {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+    p {
+        width: 70%;
+        margin: 20px 0;
+        font-family: "Calibri";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        color: rgba(255, 255, 255, 0.3);
+        text-align: center;
+    }
 }

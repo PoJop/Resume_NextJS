@@ -152,6 +152,9 @@ export const PageHome = () => {
                     <path fill="#fff" fillOpacity="0.1" d="M0 43H60.25V103H0z"></path>
                 </svg>
             </div>
+            <div className="help">
+                <p>Toggle settings</p>
+            </div>
         </>
     )
 }

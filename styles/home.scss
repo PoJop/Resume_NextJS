@@ -26,7 +26,7 @@ main {
     }
     .item__wrapper {
         background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(4px);
+        // backdrop-filter: blur(4px);
         border-radius: 5px;
         .item__container {
             padding: 2px 8px;
@@ -70,7 +70,6 @@ main {
         .nav_wrapper {
             width: 100vw;
             height: 74px;
-            -webkit-transition: all 0.3s ease 0s;
             transition: all 0.3s ease 0s;
             .content {
                 top: 25px;
@@ -233,4 +232,29 @@ main {
     position: fixed;
     top: 0;
     z-index: 30;
+}
+.popup_rot_dev {
+    display: none;
+}
+@media screen and (orientation: landscape) {
+    .popup_rot_dev {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw; 
+        height: 100vh;
+        background: linear-gradient(162.44deg, #ea916b 10%, rgba(195, 64, 217, 0.6) 100%);
+        background-color: #fff; 
+        z-index: 200;
+        & > h2 {
+            font-family: "Calibri";
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: center;
+            color: #ffff;
+        }
+    }
 }

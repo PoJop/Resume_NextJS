@@ -4,21 +4,34 @@ import { Console } from './components/Console';
 import { Networks } from './components/networks';
 import { SettingPopup } from './components/settingPopup';
 
-export const Nav = ({ navRef }) => {
+export const Nav = ({ }) => {
     const [context, setContext] = React.useContext(AppContext);
     const [navBar, setNavBar] = React.useState(false)
+    const [disabled, setDisabled] = React.useState(false)
     const [openSettingPopup, setOpenSettingPopup] = React.useState(false)
+    const navRef = React.useRef(null)
     React.useEffect(() => {
         if (navBar) setOpenSettingPopup(false)
     }, [navBar])
     React.useEffect(() => {
-        if (openSettingPopup) setNavBar(false)
+        if (openSettingPopup) {
+            setNavBar(false)
+        }
+
     }, [openSettingPopup])
+
+    React.useEffect(() => {
+        if (navRef !== null) {
+            setContext({ ...context, navRef: navRef.current })
+        }
+    }, [navRef])
+
+    React.useEffect(() => { setDisabled(true); setTimeout(() => setDisabled(false), 300) }, [navBar])
 
     return (
         <>
             {/* <Console /> */}
-            <SettingPopup openSettingPopup={openSettingPopup} />
+            <SettingPopup openSettingPopup={openSettingPopup} setDisabled={setDisabled}/>
             <nav className="nav" ref={navRef}>
                 <div className={`nav_wrapper ${navBar ? "active" : ""}`}>
                     <svg
@@ -77,6 +90,8 @@ export const Nav = ({ navRef }) => {
                         <div className="button_item">
                             <div><button
                                 onClick={() => setOpenSettingPopup(!openSettingPopup)}
+                                id="setting_popup"
+                                active={openSettingPopup ? 1 : 0}
                                 className={`${openSettingPopup ? "active" : ""}`}
                             >
                                 <svg
@@ -92,7 +107,15 @@ export const Nav = ({ navRef }) => {
                                     ></path>
                                 </svg></button>
                             </div>
-                            <div> <button className={`nav__button ${navBar ? "active" : ""}`} onClick={() => setNavBar(!navBar)}></button></div>
+                            <div>
+                                <button
+                                    className={`nav__button ${navBar ? "active" : ""}`}
+                                    active={navBar ? 1 : 0}
+                                    disabled={disabled}
+                                    ref={navRef}
+                                    onClick={() => setNavBar(!navBar)}
+                                ></button>
+                            </div>
 
                         </div>
                         <p>&nbsp;</p>

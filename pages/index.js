@@ -26,12 +26,11 @@ const useSize = (target) => {
 export default function Home() {
   const [context, setContext] = React.useContext(AppContext);
   const [currentPage, setCurrentPage] = React.useState(1)
-  const { language, toggleLanguage } = React.useContext(DataContext)
   const target = React.useRef(null)
   const size = useSize(target)
   const navRef = React.useRef(null)
-  const [gravity, setGravity] = React.useState(false)
   const mainRef = React.useRef(null)
+
   React.useEffect(() => {
     let timer = null;
 
@@ -41,27 +40,31 @@ export default function Home() {
       clearTimeout(timer);
       timer = setTimeout(function () {
         let current = 0
+        console.log(e)
         e.target.querySelectorAll('section').forEach(
           e => {
-            console.log(e.getBoundingClientRect().x)
-            if (size.width / 2 >= e.getBoundingClientRect().x) {
+            let scrollTarget = e.getBoundingClientRect().x
+            if (size.width / 2 >= scrollTarget) {
               current = e.getAttribute('page')
+              console.log(current)
             }
           }
         )
-        target.current.scrollTo({ left: size.width * current, behavior: "smooth" })
-        setCurrentPage(current)
+        target.current.scroll({ left: size.width * current, behavior: "smooth" })
+        setCurrentPage(Number(current))
       }, 100);
     });
   }, [size])
-
   return (
     <>
-      <main ref={mainRef}> 
-       {/* {...bind} */}
+      <main ref={mainRef}>
+        {/* {...bind} */}
         <Background size={size} navRef={navRef} />
+        <article className="popup_rot_dev">
+          <h2>{"<!-- Horizontal mode is still being finalized, it is better to turn off the auto-rotate screen -->"}</h2>
+        </article>
         <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}` }}>
-          <section page={0} className="page__wrapper">
+          <section page={0} className="page__wrapper home_page">
             <PageHome />
           </section>
           <section page={1} className="page__wrapper">
@@ -69,7 +72,7 @@ export default function Home() {
           </section >
           {/* <section page={2} className="page__wrapper">2</section> */}
         </div>
-        <Nav navRef={navRef}/>
+        <Nav navRef={navRef} />
       </main>
     </>
   )

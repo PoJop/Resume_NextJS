@@ -5,6 +5,8 @@ import { AppContext } from '../contexts/app-context';
 export const Background = ({ size }) => {
 
     const [runWorld, setRunWorld] = React.useState(false)
+    const [context, setContext] = React.useContext(AppContext);
+
     let Engine = Matter.Engine,
         Render = Matter.Render,
         World = Matter.World,
@@ -13,6 +15,8 @@ export const Background = ({ size }) => {
         Composite = Matter.Composite,
         MouseConstraint = Matter.MouseConstraint,
         Events = Matter.Events,
+        Vertices = Matter.Vertices,
+        Svg = Matter.Svg,
         Mouse = Matter.Mouse;
 
     let engine = Engine.create();
@@ -104,20 +108,62 @@ export const Background = ({ size }) => {
             }
         }
 
-        let topWall = Bodies.rectangle(size.width / 2, -30, size.width + 200, 50, options);
-        let leftWall = Bodies.rectangle(-45, size.height / 2, 50, size.height, options);
-        let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 50, size.height, options);
-        let bottomWall = Bodies.rectangle(size.width / 2, size.height - 26, size.width + 200, 50, options);
-        let bottomWallApp = Bodies.rectangle(size.width / 2, size.height - 45, size.width / 2, 50, options);
+        let topWall = Bodies.rectangle(size.width / 2, -30, size.width + 200, 50, {
+            ...options,
+            label: "topWall"
+        });
+        let leftWall = Bodies.rectangle(-45, size.height / 2, 50, size.height, {
+            ...options,
+            label: "leftWall"
+        });
+        let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 50, size.height, {
+            ...options,
+            label: "rightWall"
+        });
+        // let bottomWall = Bodies.rectangle(size.width / 2, size.height - 26, size.width + 200, 50, {
+        //     ...options,
+        //     label: "bottomWall"
+        // });
+        // let bottomWallApp = Bodies.rectangle(size.width / 2, size.height - 45, size.width / 2, 50, {
+        //     ...options,
+        //     label: "bottomWallApp"
+        // });
+        const steap = size.width / 18 + 30
+        var star = Vertices.fromPath(`
+        0 120 
+        -${steap * 0} -2
+        -${steap * 1} -3
+        -${steap * 2} -4
+        -${steap * 3} -5
+        -${steap * 4} -8
+        -${steap * 5} -15
+        -${steap * 6} -26
+        -${steap * 7} -37
+        -${steap * 8} -38
+        -${steap * 9} -38
+        -${steap * 10} -37
+        -${steap * 11} -26
+        -${steap * 12} -15
+        -${steap * 13} -8
+        -${steap * 14} -5
+        -${steap * 15} -4
+        -${steap * 16} -3
+        -${steap * 17} -2
+        -${steap * 18} 120
+        
+        `),
+            bottomWall = Bodies.fromVertices(size.width / 2, size.height + 20, star, {
+                ...options,
+                label: "bottomWall",
+            });
 
 
-        World.add(engine.world, [topWall, leftWall, rightWall, bottomWall, bottomWallApp]);
-        const getRandomArbitrary = (min, max) => {
-            return Math.random() * (max - min) + min;
-        }
+        World.add(engine.world, [topWall, leftWall, rightWall, bottomWall]);
+
+        const getRandomArbitrary = (min, max) => { return Math.random() * (max - min) + min }
 
         const boxs = []
-        let num = 19
+        const NUMBER_OF_SPRITE_BLOCKS = 19
 
         // Collision groups
         const group1 = Body.nextGroup(true)
@@ -130,10 +176,10 @@ export const Background = ({ size }) => {
             else return group1
         }
 
-        for (let i = 0; i < num; i++) {
+        for (let i = 0; i < NUMBER_OF_SPRITE_BLOCKS; i++) {
             boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, {
                 frictionAir: 0.001,
-                friction: 0.05,
+                friction: 0.1,
                 collisionFilter: { group: group(i) },
                 render: {
                     strokeStyle: '#ffffff',
@@ -144,10 +190,10 @@ export const Background = ({ size }) => {
                     }
                 }
             }))
-            if (num / 2 >= i) {
+            if (NUMBER_OF_SPRITE_BLOCKS / 2 >= i) {
                 boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, { //getRandomArbitrary(0, size.height)
                     frictionAir: 0.001,
-                    friction: 0.05,
+                    friction: 0.1,
                     collisionFilter: { group: group(i) },
                     render: {
                         strokeStyle: '#ffffff',
@@ -162,16 +208,38 @@ export const Background = ({ size }) => {
                 }))
             }
         }
+        const OPEN_NAV_MENU = document.querySelector(".nav__button")
+        const SETTING_POPUP = document.querySelector("#setting_popup")
 
+        OPEN_NAV_MENU.addEventListener('click', (e) => {
+            let value = Boolean(Number(OPEN_NAV_MENU.getAttribute("active")))
+            handleBottom(value)
+        });
+
+        SETTING_POPUP.addEventListener('click', () => {
+            let value = Boolean(Number(OPEN_NAV_MENU.getAttribute("active")))
+            value && handleBottom(true)
+        })
+
+        const handleBottom = (value) => {
+            const POSITION = 126
+            let time = !value ? 300 : 0
+            setTimeout(() => {
+                Body.translate(bottomWall, { x: 0, y: !value ? -POSITION : POSITION });
+            }, time)
+            boxs.forEach(e => {
+                if (window.innerHeight - 190 < e.position.y) {
+                    Body.setVelocity(e, { x: getRandomArbitrary(-3, 3), y: getRandomArbitrary(-15, -10) })
+                }
+            })
+        }
         const ctx = document.querySelector('canvas').getContext('2d', { antialias: false });
         ctx.shadowOffsetX = 4;
         ctx.shadowOffsetY = 4;
         ctx.shadowBlur = 4;
         ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
 
-
         boxs.forEach(e => World.add(engine.world, e))
-
         Render.run(render);
         Engine.run(engine);
 

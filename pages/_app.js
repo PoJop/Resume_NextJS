@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
     orientation: false,
     gravity: true,
     interaction: false,
+    navRef: null,
   });
 
   const toggleLanguage = (lang = "en") => Object.keys(language).forEach(key => key === lang && setCurrentLanguage(language[key]))

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppContext } from '../../../contexts/app-context';
 
-export const SettingPopup = ({ openSettingPopup }) => {
+export const SettingPopup = ({ openSettingPopup, setDisabled }) => {
 
     const [context, setContext] = React.useContext(AppContext);
 
@@ -19,10 +19,14 @@ export const SettingPopup = ({ openSettingPopup }) => {
             setContext({ ...context, gravity: !context.gravity })
         }
     }
-    React.useEffect(() => {
-        console.log(context)
-    }, [context])
 
+
+    React.useEffect(() => {
+        if (context.gravity) {
+            setDisabled(true); setTimeout(() => setDisabled(false), 1000)
+        }
+    }, [context.gravity])
+    
     return (
         <>
             <article className={`setting_popup ${openSettingPopup ? "open" : ""}`}>
