@@ -33,8 +33,26 @@ export default function Home() {
 
   React.useEffect(() => {
     let timer = null;
-
+    function getPageMaxScroll() {
+      // Cross browser page height detection is ugly
+      return Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+      ) - window.innerHeight; // Subtract viewport height
+    }
     if (size === undefined) return
+    let top = 1000000; // Value larger than maximum scroll
+    const maxScroll = getPageMaxScroll();
+
+    // Fix for bug on iOS devices
+    // When top was larger than maximum page scroll
+    // "getBoundingClientRect" would take that value into calculations
+    if (top > maxScroll) {
+      top = maxScroll;
+    }
 
     target.current.addEventListener('scroll', function (e) {
       clearTimeout(timer);
@@ -50,7 +68,11 @@ export default function Home() {
             }
           }
         )
-        target.current.scroll({ left: size.width * current, behavior: "smooth" })
+        target.current.scrollTo({
+          left: size.width * current,
+          top: top,
+          behavior: "smooth"
+        })
         setCurrentPage(Number(current))
       }, 100);
     });
