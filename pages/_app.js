@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/globals.scss'
 import Head from 'next/head'
 import Script from 'next/script'
+import "core-js/stable"
 import { language, DataContext } from "../contexts/data-context.js"
 import { AppContext } from '../contexts/app-context'
 

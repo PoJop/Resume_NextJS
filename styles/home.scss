@@ -8,6 +8,7 @@ main {
 
     .pages {
         overflow-x: auto;
+        // -webkit-overflow-scrolling: touch;
         display: flex;
         // gap: 12px;
         width: 100vw;
@@ -242,10 +243,10 @@ main {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100vw; 
+        width: 100vw;
         height: 100vh;
         background: linear-gradient(162.44deg, #ea916b 10%, rgba(195, 64, 217, 0.6) 100%);
-        background-color: #fff; 
+        background-color: #fff;
         z-index: 200;
         & > h2 {
             font-family: "Calibri";

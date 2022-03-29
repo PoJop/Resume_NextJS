@@ -58,13 +58,11 @@ export default function Home() {
       clearTimeout(timer);
       timer = setTimeout(function () {
         let current = 0
-        console.log(e)
         e.target.querySelectorAll('section').forEach(
           e => {
             let scrollTarget = e.getBoundingClientRect().x
             if (size.width / 2 >= scrollTarget) {
               current = e.getAttribute('page')
-              console.log(current)
             }
           }
         )
