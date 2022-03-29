@@ -7,8 +7,11 @@ import { PageHome } from '../components/Pages/pageHome'
 import { Background } from '../components/Background'
 import { useDoubleTap } from 'use-double-tap';
 import { AppContext } from '../contexts/app-context';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import "scroll-behavior-polyfill";
+// Import Swiper styles
+import 'swiper/css';
 const useSize = (target) => {
   const [size, setSize] = React.useState()
 
@@ -21,10 +24,6 @@ const useSize = (target) => {
   return size
 }
 
-
-
-
-
 export default function Home() {
   const [context, setContext] = React.useContext(AppContext);
   const [currentPage, setCurrentPage] = React.useState(1)
@@ -32,30 +31,37 @@ export default function Home() {
   const size = useSize(target)
   const navRef = React.useRef(null)
   const mainRef = React.useRef(null)
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
 
   React.useEffect(() => {
     let timer = null;
     if (size === undefined) return
-    target.current.addEventListener('scroll', function (e) {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        let current = 0
-        e.target.querySelectorAll('section').forEach(
-          e => {
-            let scrollTarget = e.getBoundingClientRect().x
-            if (size.width / 2 >= scrollTarget) {
-              current = e.getAttribute('page')
-            }
-          }
-        )
-        target.current.scrollTo({
-          left: size.width * current,
-          top: 0,
-          behavior: "smooth"
-        })
-        setCurrentPage(Number(current))
-      }, 100);
-    });
+    // target.current.addEventListener('scroll', function (e) {
+    //   clearTimeout(timer);
+    //   timer = setTimeout(function () {
+    //     let current = 0
+    //     e.target.querySelectorAll('section').forEach(
+    //       e => {
+    //         let scrollTarget = e.getBoundingClientRect().x
+    //         if (size.width / 2 >= scrollTarget) {
+    //           current = e.getAttribute('page')
+    //         }
+    //       }
+    //     )
+    //     target.current.scrollTo({
+    //       left: size.width * current,
+    //       top: 0,
+    //       behavior: "smooth"
+    //     })
+    //     setCurrentPage(Number(current))
+    //   }, 100);
+    // });
   }, [size])
   return (
     <>
@@ -65,14 +71,16 @@ export default function Home() {
         <article className="popup_rot_dev">
           <h2>{"<!-- Horizontal mode is still being finalized, it is better to turn off the auto-rotate screen -->"}</h2>
         </article>
-        <div scroll-behavior="smooth" ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}` }}>
-          <section page={0} className="page__wrapper home_page">
-            <PageHome />
-          </section>
-          <section page={1} className="page__wrapper">
-            <PageInfo />
-          </section >
-          {/* <section page={2} className="page__wrapper">2</section> */}
+        <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}` }}>
+          <Swiper {...settings}>
+            <SwiperSlide page={0} className="page__wrapper home_page">
+              <PageHome />
+            </SwiperSlide>
+            <SwiperSlide page={1} className="page__wrapper">
+              <PageInfo />
+            </SwiperSlide >
+            {/* <section page={2} className="page__wrapper">2</section> */}
+          </Swiper>
         </div>
         <Nav navRef={navRef} />
       </main>
