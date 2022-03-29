@@ -17,21 +17,8 @@ function MyApp({ Component, pageProps }) {
   const toggleLanguage = (lang = "en") => Object.keys(language).forEach(key => key === lang && setCurrentLanguage(language[key]))
 
   React.useEffect(() => {
-    hideAddressBar();
-    window.addEventListener("orientationchange", function () {
-      hideAddressBar();
-    }, false);
+    setTimeout(function () { window.scrollTo(0, 1) }, 100)
   }, [])
-
-  const hideAddressBar = () => {
-    setTimeout(function () {
-      document.body.style.height = window.outerHeight + 'px';
-      setTimeout(function () {
-        window.scrollTo(0, 1);
-      }, 200);
-    }, 100);
-    return false;
-  }
 
   return (
     <>
