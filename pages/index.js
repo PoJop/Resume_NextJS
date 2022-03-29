@@ -6,10 +6,9 @@ import { PageInfo } from '../components/Pages/pageInfo'
 import { PageHome } from '../components/Pages/pageHome'
 import { Background } from '../components/Background'
 import { useDoubleTap } from 'use-double-tap';
-import { AppContext } from '../contexts/app-context'
-if (!("scrollBehavior" in document.documentElement.style)) {
-  await import("scroll-behavior-polyfill");
-}
+import { AppContext } from '../contexts/app-context';
+
+import "scroll-behavior-polyfill";
 const useSize = (target) => {
   const [size, setSize] = React.useState()
 
@@ -36,7 +35,7 @@ export default function Home() {
 
   React.useEffect(() => {
     let timer = null;
-
+    if (size === undefined) return
     target.current.addEventListener('scroll', function (e) {
       clearTimeout(timer);
       timer = setTimeout(function () {
