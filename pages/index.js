@@ -7,6 +7,9 @@ import { PageHome } from '../components/Pages/pageHome'
 import { Background } from '../components/Background'
 import { useDoubleTap } from 'use-double-tap';
 import { AppContext } from '../contexts/app-context'
+if (!("scrollBehavior" in document.documentElement.style)) {
+  await import("scroll-behavior-polyfill");
+}
 const useSize = (target) => {
   const [size, setSize] = React.useState()
 
@@ -33,26 +36,6 @@ export default function Home() {
 
   React.useEffect(() => {
     let timer = null;
-    function getPageMaxScroll() {
-      // Cross browser page height detection is ugly
-      return Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      ) - window.innerHeight; // Subtract viewport height
-    }
-    if (size === undefined) return
-    let top = 1000000; // Value larger than maximum scroll
-    const maxScroll = getPageMaxScroll();
-
-    // Fix for bug on iOS devices
-    // When top was larger than maximum page scroll
-    // "getBoundingClientRect" would take that value into calculations
-    if (top > maxScroll) {
-      top = maxScroll;
-    }
 
     target.current.addEventListener('scroll', function (e) {
       clearTimeout(timer);
@@ -68,7 +51,7 @@ export default function Home() {
         )
         target.current.scrollTo({
           left: size.width * current,
-          top: top,
+          top: 0,
           behavior: "smooth"
         })
         setCurrentPage(Number(current))
@@ -83,7 +66,7 @@ export default function Home() {
         <article className="popup_rot_dev">
           <h2>{"<!-- Horizontal mode is still being finalized, it is better to turn off the auto-rotate screen -->"}</h2>
         </article>
-        <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}` }}>
+        <div scroll-behavior="smooth" ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}` }}>
           <section page={0} className="page__wrapper home_page">
             <PageHome />
           </section>
