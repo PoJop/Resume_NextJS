@@ -2,7 +2,7 @@ import React from 'react';
 import { DataContext } from '../../contexts/data-context';
 import { WrapperItem } from '../wrapperItem';
 
-export const PageInfo = () => {
+export const InfoPage = () => {
     const [dropDownFullName, setDropDownFullName] = React.useState(false)
     const [dropDownStack, setDropDownStack] = React.useState(false)
     const { language, toggleLanguage } = React.useContext(DataContext)

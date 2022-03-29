@@ -1,11 +1,9 @@
 import React from 'react';
 import Matter from 'matter-js'
-import { AppContext } from '../contexts/app-context';
 
 export const Background = ({ size }) => {
 
     const [runWorld, setRunWorld] = React.useState(false)
-    const [context, setContext] = React.useContext(AppContext);
 
     let Engine = Matter.Engine,
         Render = Matter.Render,
@@ -62,7 +60,8 @@ export const Background = ({ size }) => {
 
         ORIENTATION_ELEMENT.addEventListener('click', (e) => {
             let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
-
+            if (valueOrientation) handleGravity(false)
+            
             const checkedOrientation = () => {
                 if (typeof DeviceOrientationEvent.requestPermission === 'function') {
                     DeviceOrientationEvent.requestPermission()
@@ -120,18 +119,8 @@ export const Background = ({ size }) => {
             ...options,
             label: "rightWall"
         });
-        // let bottomWall = Bodies.rectangle(size.width / 2, size.height - 26, size.width + 200, 50, {
-        //     ...options,
-        //     label: "bottomWall"
-        // });
-        // let bottomWallApp = Bodies.rectangle(size.width / 2, size.height - 45, size.width / 2, 50, {
-        //     ...options,
-        //     label: "bottomWallApp"
-        // });
         const steap = size.width / 18 + 30
-        var star = Vertices.fromPath(`
-        0 120 
-        -${steap * 0} -2
+        var model = Vertices.fromPath(`0 120 0 -2
         -${steap * 1} -3
         -${steap * 2} -4
         -${steap * 3} -5
@@ -149,14 +138,15 @@ export const Background = ({ size }) => {
         -${steap * 15} -4
         -${steap * 16} -3
         -${steap * 17} -2
-        -${steap * 18} 120
-        
-        `),
-            bottomWall = Bodies.fromVertices(size.width / 2, size.height + 20, star, {
+        -${steap * 18} 120 `),
+            bottomWall = Bodies.fromVertices(size.width / 2, size.height + 20, model, {
                 ...options,
                 label: "bottomWall",
+                friction: 0.5,
+                // render: {
+                //     background: "#0000",
+                // }
             });
-
 
         World.add(engine.world, [topWall, leftWall, rightWall, bottomWall]);
 
@@ -178,8 +168,9 @@ export const Background = ({ size }) => {
 
         for (let i = 0; i < NUMBER_OF_SPRITE_BLOCKS; i++) {
             boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, {
-                frictionAir: 0.001,
+                frictionAir: 0.0001,
                 friction: 0.1,
+                mass: 10,
                 collisionFilter: { group: group(i) },
                 render: {
                     strokeStyle: '#ffffff',
@@ -192,7 +183,7 @@ export const Background = ({ size }) => {
             }))
             if (NUMBER_OF_SPRITE_BLOCKS / 2 >= i) {
                 boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, { //getRandomArbitrary(0, size.height)
-                    frictionAir: 0.001,
+                    frictionAir: 0.0001,
                     friction: 0.1,
                     collisionFilter: { group: group(i) },
                     render: {
@@ -260,7 +251,6 @@ export const Background = ({ size }) => {
         setRunWorld(true)
 
     }, [runWorld, size])
-
 
     return <article id="article" />
 }

@@ -2,34 +2,69 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
 }
-.logo {
-    // z-index: 1000;
-    position: relative;
-    svg {
-        width: 50px;
-        height: 40px;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-}
+
 .title {
     h1 {
         font-family: "Calibri";
         font-style: normal;
         font-weight: 400;
-        font-size: 26px;
+        font-size: 24px;
         line-height: 32px;
         text-align: center;
         margin-top: 20px;
         color: #ffffff;
         text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.42);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        span {
+            font-family: "Calibri";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 32px;
+            text-align: right;
+
+            color: #ffffff;
+
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.42);
+        }
         strong {
+            margin-top: 10px;
+            margin-bottom: 10px;
             position: relative;
             font-weight: 700;
             font-size: 62px;
+            line-height: 66px;
             z-index: 1;
+            align-self: flex-start;
+            &::before {
+                content: "<strong>";
+                display: block;
+                text-align: start;
+                font-family: "Calibri";
+                font-style: normal;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 14px;
+                color: rgba(255, 255, 255, 0.2);
+                text-shadow: none;
+                align-self: flex-start;
+            }
+            &::after {
+                content: "</strong>";
+                display: block;
+                text-align: end;
+                font-family: "Calibri";
+                font-style: normal;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 14px;
+                color: rgba(255, 255, 255, 0.2);
+                text-shadow: none;
+            }
         }
         &::before {
             content: "<h1>";
@@ -42,6 +77,7 @@
             line-height: 14px;
             color: rgba(255, 255, 255, 0.2);
             text-shadow: none;
+            align-self: flex-start;
         }
         &::after {
             content: "</h1>";

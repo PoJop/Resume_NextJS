@@ -3,8 +3,8 @@ import React from 'react';
 export const language = {
     en: {
         pageHome: {
-            title: "<strong>resume</strong>"
-            // title: "Hi, my name is Oleg <br/> <strong>and this is my resume</strong>"
+            title: "Hi, friends call me Oleg <br/> <span>and that's my</span> <strong>resume</strong>",
+            // subTitle: "resume"
         },
         pageInfo: {
             full_name: {
@@ -52,7 +52,7 @@ export const language = {
                 more: {
                     title: "TECHNICAL SKILLS",
                     content: ["Next js", "Node js", "JSON", "GraphQL", "REST API", "AJAX", "MongoDB", "Figma", "Adobe XD", "Photoshop",
-                        "Git", "Wordpress"],
+                        "Git", "Wordpress", "Matter JS"],
                 }
             },
             experience: {

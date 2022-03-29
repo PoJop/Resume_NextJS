@@ -15,6 +15,17 @@ main {
         position: relative;
         box-sizing: border-box;
         z-index: 4;
+        .logo {
+            // z-index: 1000;
+            position: relative;
+            svg {
+                width: 50px;
+                height: 40px;
+                position: fixed;
+                top: 0;
+                left: 0;
+            }
+        }
         .page__wrapper {
             flex: 0 1 100vw;
             flex-shrink: 0;
@@ -157,11 +168,12 @@ main {
     display: flex;
     width: 100vw;
     padding: 0 42px;
-    transform: translateY(150%);
+    height: 0;
     transition: all 1s ease 0s;
     pointer-events: none;
+    overflow: hidden;
     &.open {
-        transform: translateY(0);
+        height: 185px;
     }
     .wrapper {
         display: flex;

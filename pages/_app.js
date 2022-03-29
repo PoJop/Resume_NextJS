@@ -16,10 +16,30 @@ function MyApp({ Component, pageProps }) {
 
   const toggleLanguage = (lang = "en") => Object.keys(language).forEach(key => key === lang && setCurrentLanguage(language[key]))
 
+  React.useEffect(() => {
+    hideAddressBar();
+    window.addEventListener("orientationchange", function () {
+      hideAddressBar();
+    }, false);
+  }, [])
+
+  const hideAddressBar = () => {
+    setTimeout(function () {
+      document.body.style.height = window.outerHeight + 'px';
+      setTimeout(function () {
+        window.scrollTo(0, 1);
+      }, 1100);
+    }, 1000);
+    return false;
+  }
+  
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Resume O.Kostetzkiy 😎</title>
+        <meta name="robots" content="all" />
+        <meta name="description" content="Middle front-end developer resume" />
       </Head>
       <DataContext.Provider value={{ language: currentLanguage, toggleLanguage }}>
         <AppContext.Provider value={[context, setContext]}>
