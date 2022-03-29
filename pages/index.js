@@ -5,7 +5,6 @@ import { Nav } from '../components/Nav/nav'
 import { PageInfo } from '../components/Pages/pageInfo'
 import { PageHome } from '../components/Pages/pageHome'
 import { Background } from '../components/Background'
-import { useDoubleTap } from 'use-double-tap';
 import { AppContext } from '../contexts/app-context';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
