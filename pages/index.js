@@ -30,13 +30,6 @@ export default function Home() {
   const size = useSize(target)
   const navRef = React.useRef(null)
   const mainRef = React.useRef(null)
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
 
   React.useEffect(() => {
     let timer = null;
@@ -71,7 +64,7 @@ export default function Home() {
           <h2>{"<!-- Horizontal mode is still being finalized, it is better to turn off the auto-rotate screen -->"}</h2>
         </article>
         <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}` }}>
-          <Swiper {...settings}>
+          <Swiper>
             <SwiperSlide page={0} className="page__wrapper home_page">
               <PageHome />
             </SwiperSlide>
