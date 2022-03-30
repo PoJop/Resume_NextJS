@@ -4,7 +4,7 @@ import { Console } from './components/Console';
 import { Networks } from './components/networks';
 import { SettingPopup } from './components/settingPopup';
 
-export const Nav = ({ }) => {
+export const Nav = ({ windowSize }) => {
     const [context, setContext] = React.useContext(AppContext);
     const [navBar, setNavBar] = React.useState(false)
     const [disabled, setDisabled] = React.useState(false)
@@ -17,12 +17,12 @@ export const Nav = ({ }) => {
     React.useEffect(() => { if (navRef !== null) setContext({ ...context, navRef: navRef.current }) }, [navRef])
 
     React.useEffect(() => { setDisabled(true); setTimeout(() => setDisabled(false), 300) }, [navBar])
-
+    console.log(windowSize)
     return (
         <>
             <SettingPopup openSettingPopup={openSettingPopup} setDisabled={setDisabled} />
-            <nav className="nav" ref={navRef}>
-                <div className={`nav_wrapper ${navBar ? "active" : ""}`}>
+            <nav className="nav" ref={navRef} style={{width: `${windowSize}px`}}>
+                <div className={`nav_wrapper ${navBar ? "active" : ""}`} style={{width: `${windowSize}px`}}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="69.5"
@@ -30,6 +30,7 @@ export const Nav = ({ }) => {
                         className="svgFirstPart"
                         preserveAspectRatio="none"
                         viewBox="0 0 360 69.5"
+                        style={{width: `${windowSize.width}px`}}
                     >
                         <g filter="url(#filter0_d)">
                             <path fill="#fff" d="M0 22.5h365C265-2 104-2-5 22.5z"></path>
@@ -70,6 +71,7 @@ export const Nav = ({ }) => {
                         className="svgLastPart"
                         preserveAspectRatio="none"
                         viewBox="0 0 360 158.5"
+                        style={{width: `${windowSize.width}px`}}
                     >
                         <path d="M0 0H360V158H0z"></path>
                         <rect width="100%" className="rect2"></rect>

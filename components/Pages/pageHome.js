@@ -4,9 +4,9 @@ import { DataContext } from '../../contexts/data-context'
 export const PageHome = () => {
 
     const { language } = React.useContext(DataContext)
+    
     return (
         <>
-
             <div className="title">
                 <h1 dangerouslySetInnerHTML={{ __html: language.pageHome.title }} />
                 <strong dangerouslySetInnerHTML={{ __html: language.pageHome.subTitle }} />

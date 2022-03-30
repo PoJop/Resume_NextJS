@@ -20,7 +20,6 @@ export const SettingPopup = ({ openSettingPopup, setDisabled }) => {
         }
     }
 
-
     React.useEffect(() => {
         if (context.gravity) {
             setDisabled(true); setTimeout(() => setDisabled(false), 1000)

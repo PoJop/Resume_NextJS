@@ -2,12 +2,10 @@ import React from 'react';
 import { DataContext } from '../../contexts/data-context';
 import { WrapperItem } from '../wrapperItem';
 
-export const InfoPage = () => {
+export const InfoPage = ({ setFullScreenPhoto }) => {
     const [dropDownFullName, setDropDownFullName] = React.useState(false)
     const [dropDownStack, setDropDownStack] = React.useState(false)
     const { language, toggleLanguage } = React.useContext(DataContext)
-    
-
     return (
         <>
             <div className="full_name">
@@ -88,10 +86,10 @@ export const InfoPage = () => {
             <div className="abuot_me">
                 <WrapperItem>
                     <h5>{language.pageInfo.abuot_me.title}</h5>
-                    <p>
-                        <img src="./photo.jpg" />
-                        {language.pageInfo.abuot_me.content}
-                    </p>
+                    <div>
+                        <img src="./photo.jpg" onClick={() => setFullScreenPhoto(true)} />
+                        <p dangerouslySetInnerHTML={{ __html: language.pageInfo.abuot_me.content }} />
+                    </div>
                 </WrapperItem>
             </div>
             <div className="languages">
@@ -120,6 +118,7 @@ export const InfoPage = () => {
             <div className="p-s_message">
                 <strong>{language.pageInfo.message}</strong>
             </div>
+
         </>
     )
 }

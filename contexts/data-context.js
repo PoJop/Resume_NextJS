@@ -15,17 +15,20 @@ export const language = {
                 email: "E-mail: kostetzkiy.oleg@gmail.com",
             },
             description: {
-                content: ` Desired Position: <strong>Middle front-end developer</strong><br/>
+                content: ` Desired Position: <strong>Middle front-end developer ~ 1400$</strong><br/>
                    <span>Self- taught, have experience in commercial development</span>`,
             },
             abuot_me: {
                 title: "SEVERAL FACTS ABOUT ME",
-                content: `Young, not lacking in intelligence, a specialist)
-            I am hard working and stubborn, I may not even sleep till I get results.
-            I easily find common language, know how to communicate and get along with people
-            In general, I am a very positive person
-            
-            Had a full life before the war, but now the only fun I have is fucking up orcs and marauders with sticks. Therefore, I want to load myself with work as much as possible to distract myself from these damn sounds of sirens and explosions. Yes, and I want to help our army financially, even a little, to speed up the Ukrainian victory) So I'll work harder.`
+                content: `
+                <span>Young, not lacking in intelligence, specialist)</span><br/>
+
+                <span>I'm hardworking and stubborn, I can even stay awake until I achieve results. I easily find common language, know how to communicate and get along with people.</span><br/> 
+                
+                <span>In general, I'm a positive person without bad habits, but whiskey with socket for New Year is a sacred thing.</span><br/>
+                
+                <span> A lot of hobbies, but still, most of my time I give to programming - it's my favorite pastime. So I really hope, that you liked my resume and you didn't catch some bug))</span><br/>
+            `
             },
             languages: {
                 title: "LANGUAGES",
@@ -52,7 +55,7 @@ export const language = {
                 more: {
                     title: "TECHNICAL SKILLS",
                     content: ["Next js", "Node js", "JSON", "GraphQL", "REST API", "AJAX", "MongoDB", "Figma", "Adobe XD", "Photoshop",
-                        "Git", "Wordpress", "Matter JS"],
+                        "Git", "Wordpress", "Matter JS", "Socket io", "Three JS"],
                 }
             },
             experience: {

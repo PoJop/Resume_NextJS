@@ -1,9 +1,11 @@
 import React from 'react';
 import Matter from 'matter-js'
+import { AppContext } from '../contexts/app-context';
 
-export const Background = ({ size }) => {
+export const Background = () => {
 
     const [runWorld, setRunWorld] = React.useState(false)
+    const [context, setContext] = React.useContext(AppContext);
 
     let Engine = Matter.Engine,
         Render = Matter.Render,
@@ -46,22 +48,30 @@ export const Background = ({ size }) => {
     }
 
     React.useEffect(() => {
-        if (size === undefined) return
         if (runWorld) return
+
+        let windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight
+
+        // window.addEventListener("resize", () => {
+        //     windowWidth = window.innerWidth
+        //     windowHeight = window.innerHeight
+        // }, false);
 
         const ORIENTATION_ELEMENT = document.querySelector(".orientation")
         const GRAVITY_ELEMENT = document.querySelector(".gravity")
 
         GRAVITY_ELEMENT.addEventListener('click', (e) => {
             let valueGravity = Boolean(Number(GRAVITY_ELEMENT.getAttribute("active")))
+            let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
             handleGravity(!valueGravity)
+            if (valueGravity && valueOrientation) window.removeEventListener('deviceorientation', handleOrientation)
         });
 
 
         ORIENTATION_ELEMENT.addEventListener('click', (e) => {
             let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
-            if (valueOrientation) handleGravity(false)
-            
+
             const checkedOrientation = () => {
                 if (typeof DeviceOrientationEvent.requestPermission === 'function') {
                     DeviceOrientationEvent.requestPermission()
@@ -70,6 +80,7 @@ export const Background = ({ size }) => {
                                 window.addEventListener('deviceorientation', handleOrientation);
                             } else {
                                 console.error('Request to access the orientation was rejected');
+                                setContext({ ...context, orientation: false })
                             }
                         })
                         .catch(console.error);
@@ -91,8 +102,8 @@ export const Background = ({ size }) => {
             element: document.querySelector("#article"),
             engine: engine,
             options: {
-                width: size.width,
-                height: size.height,
+                width: windowWidth,
+                height: windowHeight,
                 fillStyle: 'transparent',
                 background: 'transparent',
                 wireframes: false
@@ -107,19 +118,19 @@ export const Background = ({ size }) => {
             }
         }
 
-        let topWall = Bodies.rectangle(size.width / 2, -30, size.width + 200, 50, {
+        let topWall = Bodies.rectangle(windowWidth / 2, -30, windowWidth + 200, 50, {
             ...options,
             label: "topWall"
         });
-        let leftWall = Bodies.rectangle(-45, size.height / 2, 50, size.height, {
+        let leftWall = Bodies.rectangle(-45, windowHeight / 2, 50, windowHeight, {
             ...options,
             label: "leftWall"
         });
-        let rightWall = Bodies.rectangle(size.width + 45, size.height / 2, 50, size.height, {
+        let rightWall = Bodies.rectangle(windowWidth + 45, windowHeight / 2, 50, windowHeight, {
             ...options,
             label: "rightWall"
         });
-        const steap = size.width / 18 + 30
+        const steap = windowWidth / 18 + 30
         var model = Vertices.fromPath(`0 120 0 -2
         -${steap * 1} -3
         -${steap * 2} -4
@@ -139,7 +150,7 @@ export const Background = ({ size }) => {
         -${steap * 16} -3
         -${steap * 17} -2
         -${steap * 18} 120 `),
-            bottomWall = Bodies.fromVertices(size.width / 2, size.height + 20, model, {
+            bottomWall = Bodies.fromVertices(windowWidth / 2, windowHeight + 20, model, {
                 ...options,
                 label: "bottomWall",
                 friction: 0.5,
@@ -153,7 +164,7 @@ export const Background = ({ size }) => {
         const getRandomArbitrary = (min, max) => { return Math.random() * (max - min) + min }
 
         const boxs = []
-        const NUMBER_OF_SPRITE_BLOCKS = 19
+        const NUMBER_OF_SPRITE_BLOCKS = 20
 
         // Collision groups
         const group1 = Body.nextGroup(true)
@@ -167,7 +178,7 @@ export const Background = ({ size }) => {
         }
 
         for (let i = 0; i < NUMBER_OF_SPRITE_BLOCKS; i++) {
-            boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, {
+            boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), 0, 38, 38, {
                 frictionAir: 0.0001,
                 friction: 0.1,
                 mass: 10,
@@ -182,7 +193,7 @@ export const Background = ({ size }) => {
                 }
             }))
             if (NUMBER_OF_SPRITE_BLOCKS / 2 >= i) {
-                boxs.push(Bodies.rectangle(getRandomArbitrary(0, size.width), 0, 38, 38, { //getRandomArbitrary(0, size.height)
+                boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), 0, 38, 38, { 
                     frictionAir: 0.0001,
                     friction: 0.1,
                     collisionFilter: { group: group(i) },
@@ -219,7 +230,7 @@ export const Background = ({ size }) => {
                 Body.translate(bottomWall, { x: 0, y: !value ? -POSITION : POSITION });
             }, time)
             boxs.forEach(e => {
-                if (window.innerHeight - 190 < e.position.y) {
+                if (windowHeight - 190 < e.position.y) {
                     Body.setVelocity(e, { x: getRandomArbitrary(-3, 3), y: getRandomArbitrary(-15, -10) })
                 }
             })
@@ -250,7 +261,7 @@ export const Background = ({ size }) => {
         render.mouse = mouse;
         setRunWorld(true)
 
-    }, [runWorld, size])
+    }, [runWorld])
 
     return <article id="article" />
 }
