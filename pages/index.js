@@ -70,13 +70,13 @@ const Mobile = ({ windowSize }) => {
   return (
     <>
       <main >
-        <Background/>
+        <Background size={size}/>
 
         {/* <article className="popup_rot_dev">
           <h2>{"<!-- Horizontal mode is still being finalized, it is better to turn off the auto-rotate screen -->"}</h2>
         </article> */}
 
-        <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}`, width: `${windowSize.width}px` }} >
+        <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}`}} >
           <Logo />
           <Swiper>
             <SwiperSlide page={0} className="page__wrapper home_page">

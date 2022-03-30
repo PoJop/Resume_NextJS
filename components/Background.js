@@ -2,7 +2,7 @@ import React from 'react';
 import Matter from 'matter-js'
 import { AppContext } from '../contexts/app-context';
 
-export const Background = () => {
+export const Background = ({ size }) => {
 
     const [runWorld, setRunWorld] = React.useState(false)
     const [context, setContext] = React.useContext(AppContext);
@@ -49,9 +49,10 @@ export const Background = () => {
 
     React.useEffect(() => {
         if (runWorld) return
+        if(size === undefined) return
 
-        let windowWidth = window.innerWidth,
-        windowHeight = window.innerHeight
+        let windowWidth = size.width,
+            windowHeight = size.height
 
         // window.addEventListener("resize", () => {
         //     windowWidth = window.innerWidth
@@ -193,7 +194,7 @@ export const Background = () => {
                 }
             }))
             if (NUMBER_OF_SPRITE_BLOCKS / 2 >= i) {
-                boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), 0, 38, 38, { 
+                boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), 0, 38, 38, {
                     frictionAir: 0.0001,
                     friction: 0.1,
                     collisionFilter: { group: group(i) },
@@ -261,7 +262,7 @@ export const Background = () => {
         render.mouse = mouse;
         setRunWorld(true)
 
-    }, [runWorld])
+    }, [runWorld, size])
 
     return <article id="article" />
 }
