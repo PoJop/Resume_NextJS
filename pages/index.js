@@ -1,31 +1,17 @@
 import React from 'react'
-import { Nav } from '../components/Nav/nav'
-import { InfoPage } from '../components/Pages/infoPage'
-import { PageHome } from '../components/Pages/pageHome'
-import { Background } from '../components/Background'
-import { AppContext } from '../contexts/app-context';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { Logo } from '../components/logo'
-import useResizeObserver from '@react-hook/resize-observer'
+import { MobileFrame } from '../components/MobileFrame'
+import { ThreeBackground } from '../components/ThreeBackground'
 
-const useSize = (target) => {
-  const [size, setSize] = React.useState()
-  React.useLayoutEffect(() => {
-    setSize(target.current.getBoundingClientRect())
-  }, [target])
-
-  useResizeObserver(target, (entry) => setSize(entry.contentRect))
-  return size
-}
 
 export default function Home() {
   const [windowSize, setWindowSize] = React.useState({
     width: 0,
     height: 0
   })
-
-
+  let URL = null
+  React.useEffect(() => {
+    URL = location.href
+  }, [])
   React.useEffect(() => {
     const setSize = () => {
       setWindowSize({
@@ -44,57 +30,31 @@ export default function Home() {
 
 
       {windowSize.width < 768 ? (
-        <Mobile windowSize={windowSize} />
+        <MobileFrame />
       ) : (
         <>
-          <main className="main_desktop">
 
-            <article className="article__mobile">
-              <Mobile windowSize={360} />
-            </article>
+          <main className="main_desktop">
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontSize: "26px",
+              height: "100vh",
+              color: "white",
+            }}>
+              Computer version under development
+            </div>
+            {/* <article className="article__mobile">
+              <ThreeBackground />
+              <iframe 
+              style={{position: 'absolute', zIndex: 1000, top: 0, left: 0}}
+               src={`${location.href}N57pKye83G`} width={360} height={640} align="left">
+              </iframe>
+            </article> */}
           </main>
         </>
       )}
-    </>
-  )
-}
-
-const Mobile = ({ windowSize }) => {
-
-  const [context] = React.useContext(AppContext);
-  const [fullScreenPhoto, setFullScreenPhoto] = React.useState(false)
-
-  const target = React.useRef(null)
-  const size = useSize(target)
-  console.log(size)
-  return (
-    <>
-      <main >
-        <Background size={size}/>
-
-        {/* <article className="popup_rot_dev">
-          <h2>{"<!-- Horizontal mode is still being finalized, it is better to turn off the auto-rotate screen -->"}</h2>
-        </article> */}
-
-        <div ref={target} className="pages" style={{ pointerEvents: `${!context.interaction ? "fill" : "none"}`}} >
-          <Logo />
-          <Swiper>
-            <SwiperSlide page={0} className="page__wrapper home_page">
-              <PageHome />
-            </SwiperSlide>
-            <SwiperSlide page={1} className="page__wrapper">
-              <InfoPage setFullScreenPhoto={setFullScreenPhoto} />
-            </SwiperSlide >
-          </Swiper>
-        </div>
-        <article className={`full_screen_photo ${fullScreenPhoto ? "open" : ""}`} onClick={() => setFullScreenPhoto(false)}>
-          <div>
-            <img src="./photo.jpg" />
-          </div>
-        </article>
-        <Nav windowSize={windowSize} />
-
-      </main>
     </>
   )
 }

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-hook/resize-observer": "^1.2.5",
+    "gsap": "^3.10.1",
     "matter-js": "^0.18.0",
     "next": "12.1.0",
     "phaser": "^3.55.2",
@@ -20,7 +21,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.9",
-    "swiper": "^8.0.7"
+    "swiper": "^8.0.7",
+    "three": "^0.139.0"
   },
   "devDependencies": {
     "eslint": "8.11.0",

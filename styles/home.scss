@@ -1,18 +1,14 @@
 body {
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+
+    overflow: hidden;
 }
 .main_desktop {
     background: linear-gradient(162.44deg, #ea916b 10%, rgba(195, 64, 217, 0.6) 100%);
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
-    .article__mobile {
-        width: 360px;
-        height: 641px;
-        & > main {
-            position: relative;
-        }
-    }
+    .article__mobile {}
 }
 main {
     overflow: hidden;
@@ -21,6 +17,7 @@ main {
     .pages {
         overflow-x: auto;
         display: flex;
+        width: 100vw;
         position: relative;
         box-sizing: border-box;
         z-index: 4;
@@ -35,7 +32,7 @@ main {
             }
         }
         .page__wrapper {
-            flex: 0 1 100%;
+            flex: 0 1 100vw;
             flex-shrink: 0;
             height: 100vh;
             padding: 37px 25px;
@@ -52,10 +49,12 @@ main {
         }
     }
     nav {
+        width: 100vw;
         position: fixed;
         bottom: 0;
         z-index: 10;
         svg {
+            width: 100vw;
         }
         .content {
             .networks {
@@ -82,6 +81,7 @@ main {
             }
         }
         .nav_wrapper {
+            width: 100vw;
             height: 74px;
             transition: all 0.3s ease 0s;
             .content {
@@ -175,6 +175,7 @@ main {
     overflow: hidden;
     &.open {
         height: 185px;
+
     }
     .wrapper {
         display: flex;

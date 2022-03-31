@@ -3,9 +3,12 @@ import '../styles/globals.scss'
 import Head from 'next/head'
 import { language, DataContext } from "../contexts/data-context.js"
 import { AppContext } from '../contexts/app-context'
+import { useRouter } from 'next/router'
+
 
 function MyApp({ Component, pageProps }) {
   const [currentLanguage, setCurrentLanguage] = React.useState(language.en)
+  const router = useRouter()
 
   const [context, setContext] = React.useState({
     orientation: false,
@@ -13,6 +16,12 @@ function MyApp({ Component, pageProps }) {
     interaction: false,
     navRef: null,
   });
+  // React.useLayoutEffect(() => {
+  //   console.log(location.href)
+  //   if(location.href.includes("/mobile")) {
+  //     // router.push('/')
+  //   }
+  // }, [])
 
   const toggleLanguage = (lang = "en") => Object.keys(language).forEach(key => key === lang && setCurrentLanguage(language[key]))
 

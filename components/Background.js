@@ -236,7 +236,7 @@ export const Background = ({ size }) => {
                 }
             })
         }
-        const ctx = document.querySelector('canvas').getContext('2d', { antialias: false });
+        const ctx = document.querySelector("#article").querySelector('canvas').getContext('2d', { antialias: false });
         ctx.shadowOffsetX = 4;
         ctx.shadowOffsetY = 4;
         ctx.shadowBlur = 4;
