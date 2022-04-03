@@ -1,6 +1,6 @@
 import React from 'react'
-import { DesktopFrame } from '../components/Frames/DesktopFrame'
-import { MobileFrame } from '../components/Frames/MobileFrame'
+import { DesktopFrame } from '../components/DesktopFrame'
+import { MobileFrame } from '../components/MobileFrame'
 
 
 export default function Home() {

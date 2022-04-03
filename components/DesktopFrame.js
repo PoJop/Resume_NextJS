@@ -1,10 +1,10 @@
 import React from 'react'
-import { Background } from '../Background'
+import { Background } from './Background'
 import gsap from "gsap";
-import { InfoPage } from '../Pages/InfoPage';
-import { PageHome } from '../Pages/HomePage';
-import { Networks } from '../Nav/components/networks';
-import { Logo, QRSite } from '../icons';
+import { InfoPage } from './Pages/infoPage';
+import { PageHome } from './Pages/homePage';
+import { Networks } from './Nav/components/networks';
+import { Logo, QRSite } from './icons';
 
 export const DesktopFrame = () => {
 
