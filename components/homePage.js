@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataContext } from '../../contexts/data-context'
+import { DataContext } from '../contexts/data-context'
 
 export const PageHome = () => {
 

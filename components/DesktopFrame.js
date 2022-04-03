@@ -2,8 +2,8 @@ import React from 'react'
 import { Background } from './Background.js'
 import { Networks } from './Nav/components/networks.js';
 import { Logo, QRSite } from './icons.js';
-import { PageHome } from './Pages/HomePage.js';
-import { InfoPage } from './Pages/InfoPage.js';
+import { PageHome } from './homePage.js';
+import { InfoPage } from './infoPage.js';
 
 export const DesktopFrame = () => {
 
