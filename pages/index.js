@@ -1,6 +1,6 @@
 import React from 'react'
-import { MobileFrame } from '../components/MobileFrame'
-import { ThreeBackground } from '../components/ThreeBackground'
+import { DesktopFrame } from '../components/Frames/DesktopFrame'
+import { MobileFrame } from '../components/Frames/MobileFrame'
 
 
 export default function Home() {
@@ -27,34 +27,15 @@ export default function Home() {
   }, [])
   return (
     <>
-
-
       {windowSize.width < 768 ? (
         <MobileFrame />
       ) : (
-        <>
-
-          <main className="main_desktop">
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: "26px",
-              height: "100vh",
-              color: "white",
-            }}>
-              Computer version under development
-            </div>
-            {/* <article className="article__mobile">
-              <ThreeBackground />
-              <iframe 
-              style={{position: 'absolute', zIndex: 1000, top: 0, left: 0}}
-               src={`${location.href}N57pKye83G`} width={360} height={640} align="left">
-              </iframe>
-            </article> */}
-          </main>
-        </>
+        <DesktopFrame />
       )}
     </>
   )
 }
+{/* <iframe 
+    style={{position: 'absolute', zIndex: 1000, top: 0, left: 0}}
+     src={`${location.href}N57pKye83G`} width={360} height={640} align="left">
+    </iframe> */}

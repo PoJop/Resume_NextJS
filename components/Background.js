@@ -49,10 +49,13 @@ export const Background = ({ size }) => {
 
     React.useEffect(() => {
         if (runWorld) return
-        if(size === undefined) return
+        if (size === undefined) return
 
-        let windowWidth = size.width,
-            windowHeight = size.height
+        console.log(size)
+        let windowWidth = size.width
+        let windowHeight = size.height
+
+        let desktop = size.width > 768
 
         // window.addEventListener("resize", () => {
         //     windowWidth = window.innerWidth
@@ -62,43 +65,47 @@ export const Background = ({ size }) => {
         const ORIENTATION_ELEMENT = document.querySelector(".orientation")
         const GRAVITY_ELEMENT = document.querySelector(".gravity")
 
-        GRAVITY_ELEMENT.addEventListener('click', (e) => {
-            let valueGravity = Boolean(Number(GRAVITY_ELEMENT.getAttribute("active")))
-            let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
-            handleGravity(!valueGravity)
-            if (valueGravity && valueOrientation) window.removeEventListener('deviceorientation', handleOrientation)
-        });
+        if (GRAVITY_ELEMENT) {
+            GRAVITY_ELEMENT.addEventListener('click', (e) => {
+                let valueGravity = Boolean(Number(GRAVITY_ELEMENT.getAttribute("active")))
+                let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
+                handleGravity(!valueGravity)
+                if (valueGravity && valueOrientation) window.removeEventListener('deviceorientation', handleOrientation)
+            });
+        }
 
+        if (desktop) handleGravity(false)
 
-        ORIENTATION_ELEMENT.addEventListener('click', (e) => {
-            let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
+        if (ORIENTATION_ELEMENT) {
+            ORIENTATION_ELEMENT.addEventListener('click', (e) => {
+                let valueOrientation = Boolean(Number(ORIENTATION_ELEMENT.getAttribute("active")))
 
-            const checkedOrientation = () => {
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    DeviceOrientationEvent.requestPermission()
-                        .then((state) => {
-                            if (state === 'granted') {
-                                window.addEventListener('deviceorientation', handleOrientation);
-                            } else {
-                                console.error('Request to access the orientation was rejected');
-                                setContext({ ...context, orientation: false })
-                            }
-                        })
-                        .catch(console.error);
-                } else {
-                    window.addEventListener('deviceorientation', handleOrientation);
-                    console.log('Handle regular non iOS 13+ devices.')
+                const checkedOrientation = () => {
+                    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                        DeviceOrientationEvent.requestPermission()
+                            .then((state) => {
+                                if (state === 'granted') {
+                                    window.addEventListener('deviceorientation', handleOrientation);
+                                } else {
+                                    console.error('Request to access the orientation was rejected');
+                                    setContext({ ...context, orientation: false })
+                                }
+                            })
+                            .catch(console.error);
+                    } else {
+                        window.addEventListener('deviceorientation', handleOrientation);
+                        console.log('Handle regular non iOS 13+ devices.')
+                    }
                 }
-            }
 
-            if (valueOrientation) {
-                window.removeEventListener('deviceorientation', handleOrientation)
-                handleGravity()
-            } else {
-                checkedOrientation()
-            }
-        });
-
+                if (valueOrientation) {
+                    window.removeEventListener('deviceorientation', handleOrientation)
+                    handleGravity()
+                } else {
+                    checkedOrientation()
+                }
+            });
+        }
         let render = Render.create({
             element: document.querySelector("#article"),
             engine: engine,
@@ -131,8 +138,15 @@ export const Background = ({ size }) => {
             ...options,
             label: "rightWall"
         });
-        const steap = windowWidth / 18 + 30
-        var model = Vertices.fromPath(`0 120 0 -2
+
+        if (desktop) {
+            bottomWall = Bodies.rectangle(windowWidth / 2, windowHeight + 20, windowWidth + 200, 50, {
+                ...options,
+                label: "bottomWall",
+            });
+        } else {
+            const steap = windowWidth / 18 + 30
+            var model = Vertices.fromPath(`0 120 0 -2
         -${steap * 1} -3
         -${steap * 2} -4
         -${steap * 3} -5
@@ -151,15 +165,15 @@ export const Background = ({ size }) => {
         -${steap * 16} -3
         -${steap * 17} -2
         -${steap * 18} 120 `),
-            bottomWall = Bodies.fromVertices(windowWidth / 2, windowHeight + 20, model, {
-                ...options,
-                label: "bottomWall",
-                friction: 0.5,
-                // render: {
-                //     background: "#0000",
-                // }
-            });
-
+                bottomWall = Bodies.fromVertices(windowWidth / 2, windowHeight + 20, model, {
+                    ...options,
+                    label: "bottomWall",
+                    friction: 0.5,
+                    // render: {
+                    //     background: "#0000",
+                    // }
+                });
+        }
         World.add(engine.world, [topWall, leftWall, rightWall, bottomWall]);
 
         const getRandomArbitrary = (min, max) => { return Math.random() * (max - min) + min }
@@ -179,7 +193,7 @@ export const Background = ({ size }) => {
         }
 
         for (let i = 0; i < NUMBER_OF_SPRITE_BLOCKS; i++) {
-            boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), 0, 38, 38, {
+            boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), desktop ? getRandomArbitrary(0, windowHeight) : 0, 38, 38, {
                 frictionAir: 0.0001,
                 friction: 0.1,
                 mass: 10,
@@ -194,7 +208,7 @@ export const Background = ({ size }) => {
                 }
             }))
             if (NUMBER_OF_SPRITE_BLOCKS / 2 >= i) {
-                boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), 0, 38, 38, {
+                boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), desktop ? getRandomArbitrary(0, windowHeight) : 0, 38, 38, {
                     frictionAir: 0.0001,
                     friction: 0.1,
                     collisionFilter: { group: group(i) },
@@ -214,15 +228,19 @@ export const Background = ({ size }) => {
         const OPEN_NAV_MENU = document.querySelector(".nav__button")
         const SETTING_POPUP = document.querySelector("#setting_popup")
 
-        OPEN_NAV_MENU.addEventListener('click', (e) => {
-            let value = Boolean(Number(OPEN_NAV_MENU.getAttribute("active")))
-            handleBottom(value)
-        });
+        if (OPEN_NAV_MENU) {
+            OPEN_NAV_MENU.addEventListener('click', (e) => {
+                let value = Boolean(Number(OPEN_NAV_MENU.getAttribute("active")))
+                handleBottom(value)
+            });
+        }
 
-        SETTING_POPUP.addEventListener('click', () => {
-            let value = Boolean(Number(OPEN_NAV_MENU.getAttribute("active")))
-            value && handleBottom(true)
-        })
+        if (SETTING_POPUP) {
+            SETTING_POPUP.addEventListener('click', () => {
+                let value = Boolean(Number(OPEN_NAV_MENU.getAttribute("active")))
+                value && handleBottom(true)
+            })
+        }
 
         const handleBottom = (value) => {
             const POSITION = 126
@@ -242,7 +260,13 @@ export const Background = ({ size }) => {
         ctx.shadowBlur = 4;
         ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
 
-        boxs.forEach(e => World.add(engine.world, e))
+        boxs.forEach(e => {
+            World.add(engine.world, e)
+            if (desktop) {
+                Body.setVelocity(e, { x: getRandomArbitrary(-3, 3), y: getRandomArbitrary(-3, 3) })
+                Body.rotate(e, getRandomArbitrary(-10, 10))
+            }
+        })
         Render.run(render);
         Engine.run(engine);
 

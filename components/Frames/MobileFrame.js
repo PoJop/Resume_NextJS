@@ -1,13 +1,13 @@
 import React from 'react'
-import { AppContext } from '../contexts/app-context';
+import { AppContext } from '../../contexts/app-context';
 import useResizeObserver from '@react-hook/resize-observer'
-import { Background } from '../components/Background';
-import { Logo } from '../components/logo';
+import { Background } from '../Background';
+import { Logo } from '../icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { PageHome } from '../components/Pages/pageHome';
-import { InfoPage } from '../components/Pages/infoPage';
-import { Nav } from '../components/Nav/nav';
+import { PageHome } from '../Pages/HomePage';
+import { InfoPage } from '../Pages/InfoPage';
+import { Nav } from '../Nav/nav';
 
 const useSize = (target) => {
     const [size, setSize] = React.useState()

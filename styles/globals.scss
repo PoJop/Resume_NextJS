@@ -1,5 +1,107 @@
 @import "./reset.css";
+@import "./fontSize.scss";
 @import "./templates.scss";
-@import "./home.scss";
+
+body {
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    overflow: hidden;
+}
+::-webkit-scrollbar {
+    width: 4px; 
+    height: 100%; 
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    border-radius: 9em;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 9em;
+}
+
+.item__wrapper {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    .item__container {
+        padding: 2px 8px;
+    }
+}
+
+.full_screen_photo {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    &.open {
+        z-index: 9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(4px);
+        & > div {
+            padding: 20px;
+            & > img {
+                border-radius: 5px;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.networks {
+    margin-top: 20px;
+    h5 {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        color: #8a3976;
+    }
+    ul {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+        li {
+            width: 30px;
+            svg {
+                width: 30px;
+            }
+        }
+    }
+}
+
+.logo {
+    svg {
+        width: 50px;
+        height: 40px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+}
+
+img {
+    pointer-events: fill;
+}
+
+#article {
+    position: relative;
+    z-index: 2;
+    canvas {
+        background: transparent;
+        position: absolute;
+        transform: translate3d();
+        top: 0;
+        box-sizing: border-box;
+        z-index: 3;
+    }
+}
+
+
+
 @import "./pageHome.scss";
 @import "./pageInfo.scss";
+@import "./DesktopFrame.scss";
+@import "./MobileFrame.scss";

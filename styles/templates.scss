@@ -27,13 +27,89 @@
 @mixin btn-more {
     .btn-more {
         padding: 0;
+        pointer-events: fill;
         border: none;
-        font-style: normal;
-        font-weight: 300;
-        font-size: 12px;
-        line-height: 14px;
+        @include fz12_13;
         text-align: center;
         background-color: transparent;
         color: #8a3976;
+    }
+}
+
+.setting_popup {
+    position: fixed;
+    bottom: 74px;
+    z-index: 9;
+    display: flex;
+    width: 100vw;
+    padding: 0 42px;
+    height: 0;
+    transition: all 1s ease 0s;
+    pointer-events: none;
+    overflow: hidden;
+    &.open {
+        height: 185px;
+    }
+    .wrapper {
+        display: flex;
+        gap: 8px;
+        pointer-events: fill;
+        .bar {
+            filter: drop-shadow(0px -1px 4px rgba(0, 0, 0, 0.25));
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.23);
+            border: 1px solid #ffffff;
+            box-sizing: border-box;
+            border-radius: 10px;
+            .container {
+                & > ul {
+                    padding: 12px 22px 12px 12px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 11px;
+                    & > li {
+                        & > strong {
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 14px;
+                            line-height: 17px;
+                            color: #ffffff;
+                        }
+                        .button_setting {
+                            border: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            border: 1px solid #ebebeb;
+                            box-sizing: border-box;
+                            border-radius: 3px;
+                            width: 56px;
+                            justify-content: flex-end;
+
+                            & > span {
+                                background: #f88a8a;
+                                border-radius: 3px;
+                                width: 28px;
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 11px;
+                                line-height: 13px;
+                                padding: 2px;
+                                color: #ffffff;
+                            }
+                            &.active {
+                                justify-content: flex-start;
+                                & > span {
+                                    background: #7ab383;
+                                }
+                            }
+                        }
+                    }
+                }
+                .button_reset {
+                    padding: 0 0 8px 12px;
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { AppContext } from '../../contexts/app-context';
-import { Console } from './components/Console';
 import { Networks } from './components/networks';
 import { SettingPopup } from './components/settingPopup';
 

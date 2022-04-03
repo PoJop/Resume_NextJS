@@ -4,13 +4,11 @@
     justify-content: space-between;
     overflow: hidden;
 }
-
 .title {
     h1 {
         font-style: normal;
         font-weight: 400;
-        font-size: 24px;
-        line-height: 32px;
+        @include fz24_28;
         text-align: center;
         margin-top: 20px;
         color: #ffffff;
@@ -21,12 +19,9 @@
         span {
             font-style: normal;
             font-weight: 700;
-            font-size: 26px;
-            line-height: 32px;
+            @include fz26_32;
             text-align: right;
-
             color: #ffffff;
-
             text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.42);
         }
         strong {
@@ -34,18 +29,14 @@
             margin-bottom: 10px;
             position: relative;
             font-weight: 700;
-            font-size: 62px;
-            line-height: 66px;
+            @include fz62_70;
             z-index: 1;
             align-self: flex-start;
             &::before {
                 content: "<strong>";
                 display: block;
                 text-align: start;
-                font-style: normal;
-                font-weight: 300;
-                font-size: 12px;
-                line-height: 14px;
+                @include fz12_13;
                 color: rgba(255, 255, 255, 0.2);
                 text-shadow: none;
                 align-self: flex-start;
@@ -54,10 +45,7 @@
                 content: "</strong>";
                 display: block;
                 text-align: end;
-                font-style: normal;
-                font-weight: 300;
-                font-size: 12px;
-                line-height: 14px;
+                @include fz12_13;
                 color: rgba(255, 255, 255, 0.2);
                 text-shadow: none;
             }
@@ -66,10 +54,7 @@
             content: "<h1>";
             display: block;
             text-align: start;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 12px;
-            line-height: 14px;
+            @include fz12_13;
             color: rgba(255, 255, 255, 0.2);
             text-shadow: none;
             align-self: flex-start;
@@ -78,10 +63,7 @@
             content: "</h1>";
             display: block;
             text-align: end;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 12px;
-            line-height: 14px;
+            @include fz12_13;
             color: rgba(255, 255, 255, 0.2);
             text-shadow: none;
         }
@@ -107,6 +89,9 @@
     align-items: center;
     z-index: 1;
     position: relative;
+    @media screen and (min-width: 768px){
+        display: none;
+    }
     p {
         width: 70%;
         margin: 20px 0;

@@ -1,0 +1,55 @@
+
+@mixin fz14_15() {
+    font-size: 14px;
+    line-height: 17px;
+    font-style: normal;
+    font-weight: 300;
+    @media screen and (min-width: 768px) {
+        font-size: 15px;
+        line-height: 18px;
+    }
+}
+@mixin fz12_13() {
+    font-size: 12px;
+    line-height: 15px;
+    font-style: normal;
+    font-weight: 300;
+    @media screen and (min-width: 768px) {
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
+@mixin fz24_28() {
+    font-size: 24px;
+    line-height: 32px;
+    @media screen and (min-width: 768px) {
+        font-size: 28px;
+        line-height:38px;
+    }
+}
+@mixin fz26_32() {
+    font-size: 26px;
+    line-height: 32px;
+    @media screen and (min-width: 768px) {
+        font-size: 32px;
+        line-height: 40px;
+    }
+}
+@mixin fz62_70() {
+    font-size: 62px;
+    line-height: 66px;
+    @media screen and (min-width: 768px) {
+        font-size: 70px;
+        line-height: 77px;
+    }
+}
+@mixin fz10_13() {
+    font-size: 10px;
+    line-height: 13px;
+    font-style: normal;
+    font-weight: 300;
+    @media screen and (min-width: 768px) {
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
