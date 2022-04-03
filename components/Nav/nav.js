@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppContext } from '../../contexts/app-context';
-import { Networks } from './components/networks';
-import { SettingPopup } from './components/settingPopup';
+import { Networks } from './components/networks.js';
+import { SettingPopup } from './components/settingPopup.js';
 
 export const Nav = () => {
     const [context, setContext] = React.useContext(AppContext);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataContext } from '../../contexts/data-context';
-import { WrapperItem } from '../wrapperItem';
+import { WrapperItem } from '../wrapperItem.js';
 
 export const InfoPage = ({ setFullScreenPhoto }) => {
     const [dropDownFullName, setDropDownFullName] = React.useState(false)
