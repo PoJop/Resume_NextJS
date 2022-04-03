@@ -6,8 +6,8 @@ import { Logo } from './icons.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { PageHome } from './Pages/HomePage.js';
-import { InfoPage } from './Pages/InfoPage.js';
 import { Nav } from './Nav/nav.js';
+import { InfoPage } from './Pages/InfoPage';
 
 const useSize = (target) => {
     const [size, setSize] = React.useState()
