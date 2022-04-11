@@ -179,7 +179,7 @@ export const Background = ({ size }) => {
         const getRandomArbitrary = (min, max) => { return Math.random() * (max - min) + min }
 
         const boxs = []
-        const NUMBER_OF_SPRITE_BLOCKS = 20
+        const NUMBER_OF_SPRITE_BLOCKS = 21
 
         // Collision groups
         const group1 = Body.nextGroup(true)

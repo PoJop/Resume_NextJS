@@ -89,6 +89,9 @@ img {
 #article {
     position: relative;
     z-index: 2;
+    @media screen and (orientation: landscape)  {
+        display: none;
+    }
     canvas {
         background: transparent;
         position: absolute;
