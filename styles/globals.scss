@@ -89,7 +89,7 @@ img {
 #article {
     position: relative;
     z-index: 2;
-    @media screen and (orientation: landscape)  {
+    @media screen and (orientation: landscape) and (max-width: 768px)  {
         display: none;
     }
     canvas {
