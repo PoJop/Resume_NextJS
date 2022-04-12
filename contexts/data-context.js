@@ -15,7 +15,7 @@ export const language = {
                 email: "E-mail: kostetzkiy.oleg@gmail.com",
             },
             description: {
-                content: ` Desired Position: <strong>Middle front-end developer ~ 1400$</strong><br/>
+                content: ` Desired Position: <strong>Middle front-end developer ~ 1200$</strong><br/>
                    <span>Self- taught, have experience in commercial development</span>`,
             },
             abuot_me: {
