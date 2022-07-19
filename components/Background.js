@@ -52,9 +52,19 @@ export const Background = ({ size }) => {
         if (size === undefined) return
 
         console.log(size)
-        let windowWidth = size.width
-        let windowHeight = size.height
+        let windowWidth = window.innerWidth
+        let windowHeight = (window.innerHeight * 0.01) * 100
 
+        // windowHeight = window.innerHeight * 0.01;
+
+        window.addEventListener('resize', () => {
+
+            windowWidth = window.innerWidth
+            windowHeight = window.innerHeight * 0.01;
+        });
+        // 
+
+        console.log(windowWidth, windowHeight)
         let desktop = size.width > 768
 
         // window.addEventListener("resize", () => {
@@ -207,7 +217,7 @@ export const Background = ({ size }) => {
                     }
                 }
             }))
-            if (NUMBER_OF_SPRITE_BLOCKS / 2 >= i) {
+            if (NUMBER_OF_SPRITE_BLOCKS / 10 >= i) {
                 boxs.push(Bodies.rectangle(getRandomArbitrary(0, windowWidth), desktop ? getRandomArbitrary(0, windowHeight) : 0, 38, 38, {
                     frictionAir: 0.0001,
                     friction: 0.1,
