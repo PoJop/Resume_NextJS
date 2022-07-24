@@ -48,6 +48,7 @@ function MyApp({ Component, pageProps }) {
         <title>Resume O.Kostetzkiy 😎</title>
         <meta name="robots" content="all" />
         <meta name="description" content="Middle front-end developer resume" />
+        <meta name='freelancehunt' content='14e44263355e0c3' />
       </Head>
       <DataContext.Provider value={{ language: currentLanguage, toggleLanguage }}>
         <AppContext.Provider value={[context, setContext]}>
